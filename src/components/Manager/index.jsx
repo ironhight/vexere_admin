@@ -6,38 +6,8 @@ import BrandingWatermarkIcon from "@material-ui/icons/BrandingWatermark";
 import DirectionsCarIcon from "@material-ui/icons/DirectionsCar";
 import DvrIcon from "@material-ui/icons/Dvr";
 import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
-// class Manager extends Component {
-//   render() {
-//     return (
-//       <div className="manager">
-//         <Link to="/manager/stations" className="manager__menu">
-//           Quản lý Station
-//         </Link>
-//         <Link to="/manager/trip" className="manager__menu">
-//           Quản lý Trip
-//         </Link>
-//         <Link to="/manager/user" className="manager__menu">
-//           Quản lý User
-//         </Link>
-//         <Link to="/manager/ticket" className="manager__menu">
-//           Quản lý Ticket
-//         </Link>
-//       </div>
-//     );
-//   }
-// }
-
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     width: "100%",
-//     maxWidth: 360,
-//     backgroundColor: theme.palette.background.paper
-//   }
-// }));
-
-// function ListItemLink(props) {
-//   return <ListItem button component="a" {...props} />;
-// }
+import Authenticate from "../../HOC/Authenticate";
+// import { withRouter } from "react-router-dom";
 
 function Manager(props) {
   return (
@@ -70,4 +40,4 @@ function Manager(props) {
   );
 }
 
-export default Manager;
+export default Authenticate(Manager);

@@ -1,10 +1,13 @@
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import setAuthToken from "../utils/setAuthToken";
+import { createBrowserHistory } from 'history';
+import api from '../api/index'
+
+const history = createBrowserHistory();
 
 export const login = (credentials) => (dispatch) => {
-    return axios
-        .post("http://localhost:6789/api/users/login", credentials)
+    return api.post("/users/login", credentials)
         .then(res => {
             const { token } = res.data
             const decode = jwtDecode(token)
@@ -20,11 +23,14 @@ export const login = (credentials) => (dispatch) => {
         }))
 }
 
+
 export const logout = () => (dispatch) => {
     localStorage.removeItem("token")
-    dispatch(setCurrentUser({}))
 
     setAuthToken()
+
+    // history.push('/')
+    dispatch(setCurrentUser({}))
 }
 
 export const setCurrentUser = (data) => {
@@ -33,3 +39,4 @@ export const setCurrentUser = (data) => {
         payload: data
     }
 }
+

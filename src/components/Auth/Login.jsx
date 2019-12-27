@@ -20,10 +20,6 @@ class Login extends Component {
     e.preventDefault();
 
     const { email, password } = this.state;
-    // axios
-    //   .post("http://localhost:6789/api/users/login", { email, password })
-    //   .then(res => console.log(res))
-    //   .catch(console.log);
     this.props
       .login({ email, password })
       .then(res => {

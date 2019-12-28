@@ -12,6 +12,7 @@ class Navbar extends Component {
   render() {
     const { auth } = this.props;
     const { isAuthenticated, profile } = auth;
+    console.log("TCL: Navbar -> render -> this.props", this.props);
     return (
       <div>
         <AppBar position="static">
@@ -25,6 +26,7 @@ class Navbar extends Component {
               {/* {Object.keys(profile).length > 0 && profile.email} */}
               <Link to="/profile">Profile</Link>
             </Typography>
+
             <Button
               color="inherit"
               onClick={() => {

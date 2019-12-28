@@ -7,7 +7,6 @@ import DirectionsCarIcon from "@material-ui/icons/DirectionsCar";
 import DvrIcon from "@material-ui/icons/Dvr";
 import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 import Authenticate from "../../HOC/Authenticate";
-// import { withRouter } from "react-router-dom";
 
 function Manager(props) {
   return (

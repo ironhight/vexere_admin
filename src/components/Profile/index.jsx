@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import Authenticate from "../HOC/Authenticate";
+import Authenticate from "../../HOC/Authenticate";
 
 class Profile extends Component {
   render() {
     return (
       <div>
-        <h1>MY pROFILE</h1>
+        <h1>My Profile</h1>
       </div>
     );
   }

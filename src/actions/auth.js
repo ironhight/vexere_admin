@@ -1,16 +1,15 @@
-import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import setAuthToken from "../utils/setAuthToken";
-import { createBrowserHistory } from 'history';
 import api from '../api/index'
-
-const history = createBrowserHistory();
 
 export const login = (credentials) => (dispatch) => {
     return api.post("/users/login", credentials)
         .then(res => {
             const { token } = res.data
             const decode = jwtDecode(token)
+            if (decode.userType === "client")
+                return Promise.reject({ message: "Đăng nhập thất bại" })
+
             dispatch(setCurrentUser(decode))
 
             localStorage.setItem("token", res.data.token)
@@ -29,7 +28,6 @@ export const logout = () => (dispatch) => {
 
     setAuthToken()
 
-    // history.push('/')
     dispatch(setCurrentUser({}))
 }
 

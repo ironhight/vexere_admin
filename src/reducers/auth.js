@@ -14,9 +14,8 @@ const authReducer = (state = initialState, action) => { //function parameters
                 isAuthenticated: !_.isEmpty(action.payload),
                 profile: action.payload
             }
-        default: break;
+        default: return state;
     }
-    return state;
 }
 
 export default authReducer

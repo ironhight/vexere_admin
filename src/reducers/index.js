@@ -1,8 +1,8 @@
 import { combineReducers } from "redux"
 import auth from "./auth"
-import authReducer from "./trips"
+import trip from "./trips"
 const rootReducer = combineReducers({
-    auth, authReducer
+    auth, trip
 })
 
 export default rootReducer

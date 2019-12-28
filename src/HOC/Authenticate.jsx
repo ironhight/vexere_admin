@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { withRouter } from "react-router-dom";
@@ -7,7 +7,7 @@ const checkTokenValid = () => {
   const token = localStorage.getItem("token");
   if (!token) return false;
   const decoded = jwtDecode(token);
-  if (decoded.exp < new Date().getTime() / 1000) return false;
+  if (decoded.exp < new Date().getTime() / 1000) return false; //token ket han
   return true;
 };
 
@@ -18,18 +18,6 @@ export default function(ComposedComponent) {
       this.state = {
         auth: {}
       };
-    }
-    componentDidMount() {
-      //   const token = localStorage.getItem("token");
-      //   if (!token) return this.props.history.push("/");
-      //   if (token) {
-      //     const decoded = jwtDecode(token);
-      //     if (decoded.exp < new Date().getTime() / 1000) {
-      //       //token het han
-      //       this.props.history.push("/");
-      //     }
-      //   }
-      if (!this.props.auth.isAuthenticated) this.props.history.push("/");
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -43,7 +31,9 @@ export default function(ComposedComponent) {
           auth: props.auth
         };
       }
+      return null;
     }
+
     render() {
       return (
         <div>
@@ -58,5 +48,5 @@ export default function(ComposedComponent) {
       auth: state.auth
     };
   };
-  return withRouter(connect(mapStateToProps, null)(Authenticate));
+  return withRouter(connect(mapStateToProps)(Authenticate));
 }

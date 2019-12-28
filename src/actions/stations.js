@@ -1,45 +1,45 @@
 import api from '../api'
 
-export const createTrip = (data) => (dispatch) => {
-    api.post("trips", data)
+export const createStation = (data) => (dispatch) => {
+    api.post("/stations", data)
         .then(res => {
             dispatch({
-                type: "CREATE_TRIP",
+                action: "CREATE_STATION",
                 payload: res.data
             })
         })
         .catch(console.log())
 }
 
-export const getTrips = () => (dispatch) => {
-    api.get("/trips")
+export const getStations = (data) => (dispatch) => {
+    api.get("/stations")
         .then(res => {
             dispatch({
-                type: "GET_TRIPS",
+                aciton: "GET_STATIONS",
                 payload: res.data
             })
         })
         .catch(console.log())
 }
 
-
-export const updateTrip = (data) => (dispatch) => {
-    api.put("/trips")
+export const updateStation = (data) => (dispatch) => {
+    api.put("/stations", data)
         .then(res => {
             dispatch({
-                type: "UPDATE_TRIP",
+                action: "UPDATE_STATION",
                 payload: res.data
             })
         })
         .catch(console.log())
 }
 
-export const deleteTrip = (data) => (dispatch) => {
-    api.delete("/trips")
+export const deleteStation = (data) => (dispatch) => {
+    api.delete("stations", data)
         .then(res => {
             dispatch({
-                type: "DELETE_TRIP",
+                action: "DELETE_STATION",
                 payload: res.data
             })
         })
+        .catch(console.log())
 }

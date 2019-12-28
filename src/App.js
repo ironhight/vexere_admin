@@ -8,7 +8,7 @@ import jwtDecode from 'jwt-decode'
 import setAuthToken from './utils/setAuthToken'
 import { connect } from 'react-redux'
 import { setCurrentUser } from './actions/auth'
-import Authenticate from './Profile/index'
+import Profile from './components/Profile'
 
 import Trip from './components/Manager/Trip'
 class App extends React.Component {
@@ -31,15 +31,10 @@ class App extends React.Component {
             if (decoded.exp > new Date().getTime() / 1000) {
                 //token chi ton tai den giay nen chia 1000
                 this.props.setCurrentUser(decoded)
-                // this.setState({ isValid: true })
                 setAuthToken(token);
             }
         }
     }
-
-    // updateApp = () => {
-    //     this.forceUpdate();
-    // }
 
     render() {
         // const { isValid } = this.state
@@ -57,7 +52,7 @@ class App extends React.Component {
 
                         <Route path="/manager" exact component={Manager} />
                         <Route path="/manager/trips" exact component={Trip} /> s
-                        <Route path="/profile" exact component={Authenticate} />
+                        <Route path="/profile" exact component={Profile} />
 
                     </Switch>
                 </BrowserRouter>

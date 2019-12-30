@@ -15,7 +15,7 @@ export const getUsers = () => (dispatch) => {
     api.get("/users")
         .then(res => {
             dispatch({
-                action: "GET_USERS",
+                type: "GET_USERS",
                 payload: res.data
             })
         })
@@ -26,7 +26,7 @@ export const deleteUser = (data) => (dispatch) => {
     api.get("/users", data)
         .then(res => {
             dispatch({
-                action: "DELETE_USER",
+                type: "DELETE_USER",
                 payload: res.data
             })
         })

@@ -24,7 +24,7 @@ export const getTrips = () => (dispatch) => {
 
 
 export const updateTrip = (data) => (dispatch) => {
-    api.put("/trips")
+    api.put("/trips", data)
         .then(res => {
             dispatch({
                 type: "UPDATE_TRIP",
@@ -35,7 +35,7 @@ export const updateTrip = (data) => (dispatch) => {
 }
 
 export const deleteTrip = (data) => (dispatch) => {
-    api.delete("/trips")
+    api.delete("/trips", data)
         .then(res => {
             dispatch({
                 type: "DELETE_TRIP",

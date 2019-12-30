@@ -9,8 +9,9 @@ import setAuthToken from './utils/setAuthToken'
 import { connect } from 'react-redux'
 import { setCurrentUser } from './actions/auth'
 import Profile from './components/Profile'
-
 import Trip from './components/Manager/Trip'
+import Station from './components/Manager/Station';
+
 class App extends React.Component {
     constructor(props) {
         const token = localStorage.getItem("token")
@@ -51,7 +52,8 @@ class App extends React.Component {
                         }} />
 
                         <Route path="/manager" exact component={Manager} />
-                        <Route path="/manager/trips" exact component={Trip} /> s
+                        <Route path="/manager/trips" exact component={Trip} />
+                        <Route path="/manager/stations" exact component={Station} />
                         <Route path="/profile" exact component={Profile} />
 
                     </Switch>

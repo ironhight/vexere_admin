@@ -12,7 +12,7 @@ class Navbar extends Component {
   render() {
     const { auth } = this.props;
     const { isAuthenticated, profile } = auth;
-    console.log("TCL: Navbar -> render -> this.props", this.props);
+    // console.log("TCL: Navbar -> render -> this.props", this.props);
     return (
       <div>
         <AppBar position="static">

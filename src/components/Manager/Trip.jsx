@@ -12,38 +12,16 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
 class Trip extends Component {
-  //   constructor(props){
-  //       super(props)
-  //       this.state = {
-  //           tripList: []
-  //       }
-  //   }
-
   componentDidMount() {
     this.props.getTrips();
   }
 
-  //   renderTrip = () => {
-  //     return this.state.trips.map((trip, index) => {
-  //         return (
-  //             <TripItem
-  //                 index = {index + 1}
-  //                 key={trip.id}
-  //                 trip={trip}
-  //             />
-  //         )
-  //     })
-  //   }
-
   render() {
     const { trip } = this.props;
-    trip.length > 0
-      ? console.log("TCL: Trip -> render -> trips", trip)
-      : console.log(trip);
     return (
       <div>
         <h1>Quản lý Trip</h1>
-        {/* <TableContainer component={Paper}>
+        <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -55,8 +33,13 @@ class Trip extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.trip.map((trip, index) => (
-                <TableRow key={trip.id}>
+              {trip.map((trip, index) => (
+                // console.log(
+                //   "TCL: Trip -> render -> trip",
+                //   trip.fromStation.name
+                // )
+
+                <TableRow key={trip._id}>
                   <TableCell component="th" scope="row">
                     {index + 1}
                   </TableCell>
@@ -68,7 +51,7 @@ class Trip extends Component {
               ))}
             </TableBody>
           </Table>
-        </TableContainer> */}
+        </TableContainer>
       </div>
     );
   }

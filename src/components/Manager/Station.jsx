@@ -20,6 +20,8 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 
+import FormDialog from "./Modal";
+
 class Station extends Component {
   componentDidMount() {
     this.props.getStations();
@@ -30,6 +32,7 @@ class Station extends Component {
     return (
       <div>
         <h1>QUẢN LÝ STATIONS</h1>
+        <FormDialog />
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead>

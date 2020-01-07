@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import * as stationActions from "../../../actions/stations";
+import { connect } from "react-redux";
 
-export default function FormDialog() {
+function CreateStation({ createStation }) {
+  const [input, setInput] = useState({ name: "", address: "", province: "" });
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -14,6 +18,19 @@ export default function FormDialog() {
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleChange = e =>
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value
+    });
+
+  const handleSubmit = () => {
+    createStation(input);
+    console.log("TCL: handleSubmit -> input", input);
+    setInput({ name: "", address: "", province: "" });
     setOpen(false);
   };
 
@@ -34,26 +51,36 @@ export default function FormDialog() {
             margin="dense"
             id="name"
             label="Tên bến xe"
-            type="name"
+            type="text"
+            name="name"
+            value={input.name}
+            onChange={handleChange}
             fullWidth
+
             // style={{ marginTop: "25px" }}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="address"
             label="Địa chỉ"
-            type="address"
+            type="text"
+            name="address"
+            value={input.address}
+            onChange={handleChange}
             fullWidth
             style={{ marginTop: "25px" }}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="province"
             label="Tỉnh thành"
-            type="province"
+            type="text"
+            name="province"
             fullWidth
+            value={input.province}
+            onChange={handleChange}
             style={{ marginTop: "25px" }}
           />
         </DialogContent>
@@ -61,7 +88,7 @@ export default function FormDialog() {
           <Button onClick={handleClose} color="secondary" variant="contained">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary" variant="contained">
+          <Button onClick={handleSubmit} color="primary" variant="contained">
             Submit
           </Button>
         </DialogActions>
@@ -69,3 +96,5 @@ export default function FormDialog() {
     </div>
   );
 }
+
+export default connect(null, stationActions)(CreateStation);

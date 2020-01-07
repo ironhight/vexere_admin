@@ -9,8 +9,9 @@ import setAuthToken from './utils/setAuthToken'
 import { connect } from 'react-redux'
 import { setCurrentUser } from './actions/auth'
 import Profile from './components/Profile'
-import Trip from './components/Manager/Trip'
-import Station from './components/Manager/Station';
+import Trip from './components/Manager/Trip/TripList'
+import Station from './components/Manager/Station/StationList';
+import UpdateStation from "./components/Manager/Station/UpdateStation";
 
 class App extends React.Component {
     constructor(props) {
@@ -54,7 +55,13 @@ class App extends React.Component {
                         <Route path="/manager" exact component={Manager} />
                         <Route path="/manager/trips" exact component={Trip} />
                         <Route path="/manager/stations" exact component={Station} />
+                        <Route
+                            path="/manager/stations/:stationId/update-station"
+                            exact
+                            component={UpdateStation}
+                        />
                         <Route path="/profile" exact component={Profile} />
+
 
                     </Switch>
                 </BrowserRouter>

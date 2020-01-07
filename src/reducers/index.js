@@ -1,10 +1,10 @@
 import { combineReducers } from "redux"
 import auth from "./auth"
-import trip from "./trips"
-import station from "./stations"
+import trips from "./trips"
+import stations from "./stations"
 
 const rootReducer = combineReducers({
-    auth, trip, station
+    auth, trips, stations
 })
 
 export default rootReducer

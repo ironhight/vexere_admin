@@ -22,8 +22,8 @@ export const getUsers = () => (dispatch) => {
         .catch(console.log())
 }
 
-export const deleteUser = (data) => (dispatch) => {
-    api.get("/users", data)
+export const deleteUser = (id) => (dispatch) => {
+    api.get("/users", id)
         .then(res => {
             dispatch({
                 type: "DELETE_USER",

@@ -34,8 +34,8 @@ export const updateTrip = (data) => (dispatch) => {
         .catch(console.log())
 }
 
-export const deleteTrip = (data) => (dispatch) => {
-    api.delete("/trips", data)
+export const deleteTrip = (id) => (dispatch) => {
+    api.delete("/trips", id)
         .then(res => {
             dispatch({
                 type: "DELETE_TRIP",

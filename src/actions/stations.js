@@ -1,21 +1,23 @@
 import api from '../api'
+import * as types from "../constants/actionTypes"
 
 export const createStation = (data) => (dispatch) => {
-    api.post("/stations", data)
+    return api.post("/stations", data)
         .then(res => {
             dispatch({
-                type: "CREATE_STATION",
+                type: types.CREATE_STATION,
                 payload: res.data
             })
+            Promise.resolve(res.data)
         })
-        .catch(console.log())
+        .catch(err => Promise.reject(err))
 }
 
 export const getStations = () => (dispatch) => {
     api.get("/stations")
         .then(res => {
             dispatch({
-                type: "GET_STATIONS",
+                type: types.GET_STATIONS,
                 payload: res.data
             })
         })
@@ -23,21 +25,22 @@ export const getStations = () => (dispatch) => {
 }
 
 export const updateStation = (data) => (dispatch) => {
-    api.put("/stations", data)
+    return api.put(`/stations/${data._id}`, data)
         .then(res => {
             dispatch({
-                type: "UPDATE_STATION",
+                type: types.UPDATE_STATION,
                 payload: res.data
             })
+            Promise.resolve(res.data)
         })
-        .catch(console.log())
+        .catch(err => Promise.reject(err))
 }
 
-export const deleteStation = (data) => (dispatch) => {
-    api.delete("stations", data)
+export const deleteStation = (id) => (dispatch) => {
+    api.delete("stations", id)
         .then(res => {
             dispatch({
-                type: "DELETE_STATION",
+                type: types.DELETE_STATION,
                 payload: res.data
             })
         })

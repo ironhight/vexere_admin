@@ -15,7 +15,7 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 
-// import FormDialog from "../Station/CreateStation";
+import CreateTrip from "./CreateTrip";
 
 class Trip extends Component {
   componentDidMount() {
@@ -27,7 +27,7 @@ class Trip extends Component {
     return (
       <div>
         <h1>Quản lý Trip</h1>
-        {/* <FormDialog /> */}
+        <CreateTrip />
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead>
@@ -46,8 +46,8 @@ class Trip extends Component {
                   <TableCell component="th" scope="row" align="center">
                     {index + 1}
                   </TableCell>
-                  <TableCell align="right">{trip.fromStation}</TableCell>
-                  <TableCell align="right">{trip.toStation}</TableCell>
+                  <TableCell align="right">{trip.fromStation.name}</TableCell>
+                  <TableCell align="right">{trip.toStation.name}</TableCell>
                   <TableCell align="right">{trip.startTime}</TableCell>
                   <TableCell align="right">{trip.price}</TableCell>
                   <TableCell align="center">

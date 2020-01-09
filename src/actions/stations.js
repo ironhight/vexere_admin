@@ -36,8 +36,8 @@ export const updateStation = (data) => (dispatch) => {
         .catch(err => Promise.reject(err))
 }
 
-export const deleteStation = (id) => (dispatch) => {
-    api.delete("stations", id)
+export const deleteStation = (_id) => (dispatch) => {
+    api.delete(`/stations/${_id}`)
         .then(res => {
             dispatch({
                 type: types.DELETE_STATION,

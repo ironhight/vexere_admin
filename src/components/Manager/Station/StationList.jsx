@@ -14,15 +14,74 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
+
 import CreateStation from "./CreateStation";
 
 class StationList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stationList: []
+    };
+  }
+
   componentDidMount() {
     this.props.getStations();
   }
 
-  render() {
+  getStations = async () => {
+    const stationList = await this.props.getStations();
+    this.setState({ stationList });
+  };
+
+  listenDeleteProduct = () => {
+    this.getStations();
+  };
+
+  renderStation = () => {
     const { stations } = this.props;
+    return stations.map((row, index) => {
+      return (
+        <TableRow key={index}>
+          <TableCell component="th" scope="row" align="center">
+            {index + 1}
+          </TableCell>
+          <TableCell align="right">{row.name}</TableCell>
+          <TableCell align="right">{row.address}</TableCell>
+          <TableCell align="right">{row.province}</TableCell>
+          <TableCell align="center">
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<DeleteIcon />}
+              style={{ marginRight: "10px" }}
+              onClick={async () => {
+                await this.props.deleteStation(row._id);
+                await this.props.listenDeleteProduct();
+              }}
+            >
+              Delete
+            </Button>
+
+            <Button
+              variant="contained"
+              color="primary"
+              endIcon={<UpdateIcon />}
+              onClick={() =>
+                this.props.history.push(
+                  `/manager/stations/${row._id}/update-station`
+                )
+              }
+            >
+              Update
+            </Button>
+          </TableCell>
+        </TableRow>
+      );
+    });
+  };
+
+  render() {
     return (
       <div>
         <h1>QUẢN LÝ STATIONS</h1>
@@ -38,48 +97,7 @@ class StationList extends Component {
                 <TableCell align="center">Action</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {stations.map((station, index) => (
-                <TableRow key={station._id}>
-                  <TableCell component="th" scope="row" align="center">
-                    {index + 1}
-                  </TableCell>
-                  <TableCell align="right">{station.name}</TableCell>
-                  <TableCell align="right">{station.address}</TableCell>
-                  <TableCell align="right">{station.province}</TableCell>
-                  <TableCell align="center">
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      startIcon={<DeleteIcon />}
-                      style={{ marginRight: "10px" }}
-                      onClick={() => {
-                        this.props.deleteStation(station._id);
-                        console.log(
-                          "TCL: StationList -> render -> station._id",
-                          station._id
-                        );
-                      }}
-                    >
-                      Delete
-                    </Button>
-
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      endIcon={<UpdateIcon />}
-                      onClick={() =>
-                        this.props.history.push(
-                          `/manager/stations/${station._id}/update-station`
-                        )
-                      }
-                    >
-                      Update
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+            <TableBody>{this.renderStation()}</TableBody>
           </Table>
         </TableContainer>
       </div>

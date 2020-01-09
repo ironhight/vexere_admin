@@ -1,12 +1,14 @@
 import api from '../api'
+import * as types from "../constants/actionTypes"
 
 export const createTrip = (data) => (dispatch) => {
     api.post("trips", data)
         .then(res => {
             dispatch({
-                type: "CREATE_TRIP",
+                type: types.CREATE_TRIP,
                 payload: res.data
             })
+            Promise.resolve(res.data)
         })
         .catch(console.log())
 }
@@ -15,7 +17,7 @@ export const getTrips = () => (dispatch) => {
     api.get("/trips")
         .then(res => {
             dispatch({
-                type: "GET_TRIPS",
+                type: types.GET_TRIPS,
                 payload: res.data
             })
         })
@@ -24,21 +26,22 @@ export const getTrips = () => (dispatch) => {
 
 
 export const updateTrip = (data) => (dispatch) => {
-    api.put("/trips", data)
+    return api.put(`/trips/${data._id}`, data)
         .then(res => {
             dispatch({
-                type: "UPDATE_TRIP",
+                type: types.UPDATE_TRIP,
                 payload: res.data
             })
+            Promise.resolve(res.data)
         })
         .catch(console.log())
 }
 
-export const deleteTrip = (id) => (dispatch) => {
-    api.delete("/trips", id)
+export const deleteTrip = (_id) => (dispatch) => {
+    api.delete(`/trips/${_id}`)
         .then(res => {
             dispatch({
-                type: "DELETE_TRIP",
+                type: types.DELETE_TRIP,
                 payload: res.data
             })
         })

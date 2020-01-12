@@ -12,6 +12,7 @@ import Profile from './components/Profile'
 import Trip from './components/Manager/Trip/TripList'
 import Station from './components/Manager/Station/StationList';
 import UpdateStation from "./components/Manager/Station/UpdateStation";
+import CreateTrip from "./components/Manager/Trip/CreateTrip";
 
 class App extends React.Component {
     constructor(props) {
@@ -54,6 +55,11 @@ class App extends React.Component {
 
                         <Route path="/manager" exact component={Manager} />
                         <Route path="/manager/trips" exact component={Trip} />
+                        <Route
+                            path="/manager/trips/create-trip"
+                            exact
+                            component={CreateTrip}
+                        />
                         <Route path="/manager/stations" exact component={Station} />
                         <Route
                             path="/manager/stations/:stationId/update-station"

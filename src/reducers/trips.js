@@ -11,8 +11,7 @@ const tripsReducer = (state = initialState, action) => {
             return [...state, action.payload]
 
         case "DELETE_TRIP":
-            return [...state, action.payload]
-
+            return state.filter(tr => tr._id !== action.payload)
         default: return state;
     }
 }

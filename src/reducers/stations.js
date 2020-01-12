@@ -17,8 +17,9 @@ const stationsReducer = (state = initialState, action) => {
             return [...state]
 
         case types.DELETE_STATION:
-            return [...state, action.payload]
-
+            // splice : mang goc thay doi
+            // slice: mang goc ko thay doi
+            return state.filter(st => st._id !== action.payload)
         default: return state
     }
 }

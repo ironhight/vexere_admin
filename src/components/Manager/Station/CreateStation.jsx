@@ -29,7 +29,7 @@ function CreateStation({ createStation }) {
 
   const handleSubmit = () => {
     createStation(input);
-    console.log("TCL: handleSubmit -> input", input);
+    // console.log("TCL: handleSubmit -> input", input);
     setInput({ name: "", address: "", province: "" });
     setOpen(false);
   };

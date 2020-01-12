@@ -18,25 +18,25 @@ import UpdateIcon from "@material-ui/icons/Update";
 import CreateStation from "./CreateStation";
 
 class StationList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      stationList: []
-    };
-  }
+  //   constructor(props) {
+  //     super(props);
+  //     this.state = {
+  //       stationList: []
+  //     };
+  //   }
 
   componentDidMount() {
     this.props.getStations();
   }
 
-  getStations = async () => {
-    const stationList = await this.props.getStations();
-    this.setState({ stationList });
-  };
+  //   getStations = async () => {
+  //     const stationList = await this.props.getStations();
+  //     this.setState({ stationList });
+  //   };
 
-  listenDeleteProduct = () => {
-    this.getStations();
-  };
+  //   listenDeleteProduct = () => {
+  //     this.getStations();
+  //   };
 
   renderStation = () => {
     const { stations } = this.props;
@@ -57,7 +57,7 @@ class StationList extends Component {
               style={{ marginRight: "10px" }}
               onClick={async () => {
                 await this.props.deleteStation(row._id);
-                await this.props.listenDeleteProduct();
+                // await this.props.getStations();
               }}
             >
               Delete

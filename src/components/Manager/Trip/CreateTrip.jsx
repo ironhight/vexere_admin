@@ -1,118 +1,141 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import * as stationActions from "../../../actions/stations";
 import * as tripActions from "../../../actions/trips";
 import { connect } from "react-redux";
+import _ from "lodash";
 
-function CreateTrip({ createTrip }) {
-  const [input, setInput] = useState({
-    fromStation: "",
-    toStation: "",
-    startTime: "",
-    price: ""
-  });
+class CreateTrip extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fromStation: "",
+      toStation: "",
+      startTime: "",
+      price: ""
+    };
+  }
 
-  const [open, setOpen] = React.useState(false);
+  componentDidMount() {
+    if (_.isEmpty(this.props.stations)) {
+      this.props.getStations();
+    }
+  }
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  onSubmit = e => {
+    e.preventDefault();
+    const { fromStation, toStation, startTime, price } = this.state;
+    const data = { fromStation, toStation, startTime, price };
+    this.props
+      .createTrip(data)
+      .then(() => this.props.history.push("/manager/trips"))
+      .catch(err => console.log(err));
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleChange = e =>
-    setInput({
-      ...input,
+  onChange = e => {
+    this.setState({
       [e.target.name]: e.target.value
     });
-
-  const handleSubmit = () => {
-    createTrip(input);
-    // console.log("TCL: handleSubmit -> input", input);
-    setInput({ fromStation: "", toStation: "", startTime: "", price: "" });
-    setOpen(false);
   };
 
-  return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Thêm Trip
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Trip</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="fromStation"
-            label="Nơi đi"
-            type="text"
-            name="fromStation"
-            value={input.fromStation}
-            onChange={handleChange}
-            fullWidth
+  render() {
+    const { fromStation, toStation, startTime, price } = this.state;
+    return (
+      <div>
+        <h1>THÊM MỚI TRIP</h1>
+        <form onSubmit={this.onSubmit}>
+          <FormControl>
+            <InputLabel style={{ width: "200px" }} id="fromStation">
+              Ga xuất phát
+            </InputLabel>
+            <Select
+              style={{ width: "200px" }}
+              labelId="fromStation"
+              id="fromStation"
+              name="fromStation"
+              value={fromStation}
+              onChange={this.onChange}
+            >
+              {this.props.stations.map((elm, index) => {
+                return (
+                  <MenuItem key={index} value={elm._id}>
+                    {elm.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <br />
+          <FormControl>
+            <InputLabel style={{ width: "200px" }} id="toStation">
+              Ga đến
+            </InputLabel>
+            <Select
+              style={{ width: "200px" }}
+              labelId="toStation"
+              id="toStation"
+              name="toStation"
+              value={toStation}
+              onChange={this.onChange}
+            >
+              {this.props.stations.map((elm, index) => {
+                return (
+                  <MenuItem key={index} value={elm._id}>
+                    {elm.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
 
-            // style={{ marginTop: "25px" }}
-          />
+          <br />
+
           <TextField
-            autoFocus
-            margin="dense"
-            id="toStation"
-            label="Nơi đến"
-            type="text"
-            name="toStation"
-            value={input.toStation}
-            onChange={handleChange}
-            fullWidth
-            style={{ marginTop: "25px" }}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="startTime"
-            label="Giờ xuất phát"
-            type="text"
+            type="date"
+            id="standard-basic"
+            label="startTime"
+            style={{ margin: "15px" }}
             name="startTime"
-            fullWidth
-            value={input.startTime}
-            onChange={handleChange}
-            style={{ marginTop: "25px" }}
+            value={startTime}
+            onChange={this.onChange}
           />
-
+          <br />
           <TextField
-            autoFocus
-            margin="dense"
-            id="price"
-            label="Giá tiền"
-            type="text"
+            type="number"
+            id="standard-basic"
+            label="price"
+            style={{ margin: "15px" }}
             name="price"
-            fullWidth
-            value={input.price}
-            onChange={handleChange}
-            style={{ marginTop: "25px" }}
+            value={price}
+            onChange={this.onChange}
           />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="secondary" variant="contained">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} color="primary" variant="contained">
+          <br />
+
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            style={{ margin: "15px" }}
+          >
             Submit
           </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+        </form>
+      </div>
+    );
+  }
 }
 
-export default connect(null, tripActions)(CreateTrip);
+const mapStateToProps = state => {
+  return {
+    stations: state.stations
+  };
+};
+
+export default connect(mapStateToProps, { ...stationActions, ...tripActions })(
+  CreateTrip
+);

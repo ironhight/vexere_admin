@@ -41,7 +41,7 @@ export const deleteStation = (_id) => (dispatch) => {
         .then(res => {
             dispatch({
                 type: types.DELETE_STATION,
-                payload: res.data
+                payload: _id
             })
         })
         .catch(console.log())

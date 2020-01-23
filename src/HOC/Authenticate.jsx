@@ -3,6 +3,11 @@ import { connect } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { withRouter } from "react-router-dom";
 
+/**
+ * Return false when no have token and token expred, Ngược lại return true.
+ * decode.exp la 1 so co dang numbericdate
+ * getTime() return về mini giây của kiểu numbericday
+ */
 const checkTokenValid = () => {
   const token = localStorage.getItem("token");
   if (!token) return false;
@@ -11,6 +16,9 @@ const checkTokenValid = () => {
   return true;
 };
 
+/**
+ * @todo: take a component and return a new component
+ */
 export default function(ComposedComponent) {
   class Authenticate extends React.Component {
     constructor(props) {
@@ -22,6 +30,7 @@ export default function(ComposedComponent) {
 
     static getDerivedStateFromProps(props, state) {
       //props moi nhan duoc voi state truoc do
+      //   console.log(state.auth.isAuthenticated && !checkTokenValid());
       if (
         props.auth.isAuthenticated !== state.auth.isAuthenticated &&
         !checkTokenValid()

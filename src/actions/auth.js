@@ -1,7 +1,12 @@
 import jwtDecode from 'jwt-decode'
 import setAuthToken from "../utils/setAuthToken";
 import api from '../api/index'
-
+/**
+ * return : 
+ * dispatch: trigger state thay doi
+ * luu token vao localStorage
+ * bo token vao header
+ */
 export const login = (credentials) => (dispatch) => {
     return api.post("/users/login", credentials)
         .then(res => {

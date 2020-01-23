@@ -45,8 +45,8 @@ class TripList extends Component {
         .get("name")
         .value();
 
-      console.log(res);
-      console.log(res2);
+      //   console.log(res);
+      //   console.log(res2);
       //
       return (
         <TableRow key={index}>

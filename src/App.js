@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Login from './components/Auth/Login'
+// import Login from './components/Auth/Login'
+import SignIn from './components/Auth/SignIn'
 import Navbar from "./components/Navbar/index"
 import Manager from "./components/Manager/index"
 import jwtDecode from 'jwt-decode'
@@ -50,7 +51,7 @@ class App extends React.Component {
                     <Switch>
                         <Route path="/" exact render={(props) => {
                             if (isAuthenticated) return <Redirect to="manager" />
-                            return <Login {...props} />
+                            return <SignIn {...props} />
                         }} />
 
                         <Route path="/manager" exact component={Manager} />

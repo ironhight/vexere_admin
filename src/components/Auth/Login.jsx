@@ -20,8 +20,10 @@ class Login extends Component {
     e.preventDefault();
 
     const { email, password } = this.state;
+    console.log(this.state);
     this.props
       .login({ email, password })
+
       .then(res => {
         this.props.history.push("/manager");
       })

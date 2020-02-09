@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as stationActions from "../../../actions/stations";
-import Authenticate from "../../../HOC/Authenticate";
+import * as stationActions from "../redux/actions/stations";
+import Authenticate from "../HOC/Authenticate";
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -15,28 +15,12 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 
-import CreateStation from "./CreateStation";
+// import CreateStation from "../Manager/Station/CreateStation";
 
-class StationList extends Component {
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = {
-  //       stationList: []
-  //     };
-  //   }
-
+class StationsPage extends Component {
   componentDidMount() {
     this.props.getStations();
   }
-
-  //   getStations = async () => {
-  //     const stationList = await this.props.getStations();
-  //     this.setState({ stationList });
-  //   };
-
-  //   listenDeleteProduct = () => {
-  //     this.getStations();
-  //   };
 
   renderStation = () => {
     const { stations } = this.props;
@@ -55,9 +39,8 @@ class StationList extends Component {
               color="secondary"
               startIcon={<DeleteIcon />}
               style={{ marginRight: "10px" }}
-              onClick={async () => {
-                await this.props.deleteStation(row._id);
-                // await this.props.getStations();
+              onClick={() => {
+                this.props.deleteStation(row._id);
               }}
             >
               Delete
@@ -85,7 +68,7 @@ class StationList extends Component {
     return (
       <div>
         <h1>QUẢN LÝ STATIONS</h1>
-        <CreateStation />
+        {/* <CreateStation /> */}
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead>
@@ -114,4 +97,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   stationActions
-)(Authenticate(StationList));
+)(Authenticate(StationsPage));

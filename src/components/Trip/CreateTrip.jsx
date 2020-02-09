@@ -5,8 +5,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import * as stationActions from "../../../actions/stations";
-import * as tripActions from "../../../actions/trips";
+import * as stationActions from "../../redux/actions/stations";
+import * as tripActions from "../../redux/actions/trips";
 import { connect } from "react-redux";
 import _ from "lodash";
 

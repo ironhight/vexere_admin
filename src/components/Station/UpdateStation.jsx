@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
-import * as stationActions from "../../../actions/stations";
+import * as stationActions from "../../../redux/actions/stations";
 
 class UpdateStation extends Component {
   constructor(props) {

@@ -1,53 +1,54 @@
 // import React from "react";
 // import { Route, Switch } from "react-router-dom";
-import DashboardPage from "./pages/DashboardPage";
-import ProfilePage from "./pages/ProfilePage";
-import StationsPage from "./pages/StationsPage";
-import TripsPage from "./pages/TripsPage";
-import TicketsPage from "./pages/TicketsPage";
-import UsersPage from "./pages/UsersPage";
-import NotFoundPage from "./pages/NotFoundPage";
+
+// import DashboardPage from "./pages/DashboardPage";
+// import ProfilePage from "./pages/ProfilePage";
+// import StationsPage from "./pages/StationsPage";
+// import TripsPage from "./pages/TripsPage";
+// import TicketsPage from "./pages/TicketsPage";
+// import UsersPage from "./pages/UsersPage";
+// import NotFoundPage from "./pages/NotFoundPage";
 
 // import CreateTrip from "./components/Manager/Trip/CreateTrip";
 // import UpdateStation from "./components/Manager/Station/UpdateStation";
 
-const routesAdmin = [
-  {
-    path: "/admin/dashboard",
-    exact: false,
-    component: DashboardPage
-  },
-  {
-    path: "/admin/profile",
-    exact: false,
-    component: ProfilePage
-  },
-  {
-    path: "/manager/stations",
-    exact: false,
-    component: StationsPage
-  },
-  {
-    path: "/manager/trips",
-    exact: false,
-    component: TripsPage
-  },
-  {
-    path: "/manager/tickets",
-    exact: false,
-    component: TicketsPage
-  },
-  {
-    path: "/manager/users",
-    exact: false,
-    component: UsersPage
-  },
-  {
-    path: "/404",
-    exact: true,
-    component: NotFoundPage
-  }
-];
+// const routesAdmin = [
+//   {
+//     path: "/admin/dashboard",
+//     exact: true,
+//     component: DashboardPage
+//   },
+//   {
+//     path: "/admin/profile",
+//     exact: false,
+//     component: ProfilePage
+//   },
+//   {
+//     path: "/manager/stations",
+//     exact: false,
+//     component: StationsPage
+//   },
+//   {
+//     path: "/manager/trips",
+//     exact: false,
+//     component: TripsPage
+//   },
+//   {
+//     path: "/manager/tickets",
+//     exact: false,
+//     component: TicketsPage
+//   },
+//   {
+//     path: "/manager/users",
+//     exact: false,
+//     component: UsersPage
+//   },
+//   {
+//     path: "/404",
+//     exact: true,
+//     component: NotFoundPage
+//   }
+// ];
 // class Routes extends React.Component {
 //   render() {
 //     return (
@@ -73,4 +74,32 @@ const routesAdmin = [
 // }
 
 // export default Routes;
-export { routesAdmin };
+// export { routesAdmin };
+
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import DashboardPage from "./pages/DashboardPage";
+import ProfilePage from "./pages/ProfilePage";
+import StationsPage from "./pages/StationsPage";
+import TripsPage from "./pages/TripsPage";
+import TicketsPage from "./pages/TicketsPage";
+import UsersPage from "./pages/UsersPage";
+import NotFoundPage from "./pages/NotFoundPage";
+
+class Routes extends React.Component {
+  render() {
+    return (
+      <Switch>
+        <Route path="/admin/dashboard" exact component={DashboardPage} />
+        <Route path="/admin/profile" exact component={ProfilePage} />
+        <Route path="/manager/stations" exact component={StationsPage} />
+        <Route path="/manager/trips" exact component={TripsPage} />
+        <Route path="/manager/tickets" exact component={TicketsPage} />
+        <Route path="/manager/users" exact component={UsersPage} />
+        <Route path="/404" exact component={NotFoundPage} />
+      </Switch>
+    );
+  }
+}
+
+export default Routes;

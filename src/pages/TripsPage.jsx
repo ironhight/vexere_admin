@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as tripActions from "../../../actions/trips";
-import * as stationActions from "../../../actions/stations";
-import Authenticate from "../../../HOC/Authenticate";
+import * as tripActions from "../redux/actions/trips";
+import * as stationActions from "../redux/actions/stations";
+import Authenticate from "../HOC/Authenticate";
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -19,7 +19,7 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 
 import _ from "lodash";
 
-class TripList extends Component {
+class TripsPage extends Component {
   componentDidMount() {
     if (_.isEmpty(this.props.trips)) {
       this.props.getTrips();
@@ -129,5 +129,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { ...tripActions, ...stationActions })(
-  Authenticate(TripList)
+  Authenticate(TripsPage)
 );

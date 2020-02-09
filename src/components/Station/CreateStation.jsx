@@ -5,7 +5,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import * as stationActions from "../../../actions/stations";
+import * as stationActions from "../../redux/actions/stations";
 import { connect } from "react-redux";
 
 function CreateStation({ createStation }) {

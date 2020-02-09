@@ -15,7 +15,7 @@ import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { login } from "../../actions/auth";
+import { login } from "../redux/actions/auth";
 
 function Copyright() {
   return (
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SignIn({ login }) {
+function LoginPage({ login }) {
   const [input, setInput] = useState({ email: "", password: "" });
 
   const handleChange = e =>
@@ -64,8 +64,11 @@ function SignIn({ login }) {
   const handleSubmit = e => {
     e.preventDefault();
     const { email, password } = input;
-    login({ email, password });
-    history.push("/manager");
+    login({ email, password })
+      .then(res => {
+        history.push("/admin/dashboard");
+      })
+      .catch(err => console.log(err));
   };
 
   const classes = useStyles();
@@ -139,4 +142,4 @@ function SignIn({ login }) {
   );
 }
 
-export default connect(null, { login })(SignIn);
+export default connect(null, { login })(LoginPage);

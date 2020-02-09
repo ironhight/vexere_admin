@@ -18,19 +18,19 @@ class ChartSection1 extends Component {
       labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
       datasets: [
         {
-          label: "Số vé đã mua",
+          label: "Lượng vé mua",
           data: [12, 39, 3, 50, 2, 32, 84],
           backgroundColor: "rgba(245, 74, 85, 0.5)",
           borderWidth: 1
         },
         {
-          label: "#2",
+          label: "Lượng chuyến đi",
           data: [56, 24, 5, 16, 45, 24, 8],
           backgroundColor: "rgba(90, 173, 246, 0.5)",
           borderWidth: 1
         },
         {
-          label: "#3",
+          label: "Lượng người dùng",
           data: [12, 25, 54, 3, 15, 44, 3],
           backgroundColor: "rgba(245, 192, 50, 0.5)",
           borderWidth: 1
@@ -100,7 +100,7 @@ class ChartSection1 extends Component {
         </MDBCol>
         <MDBCol md="4" className="mb-4">
           <MDBCard className="mb-4">
-            <MDBCardHeader>Pie chart</MDBCardHeader>
+            <MDBCardHeader>Lượng vé mua theo tháng</MDBCardHeader>
             <MDBCardBody>
               <Pie data={dataPie} height={300} options={{ responsive: true }} />
             </MDBCardBody>

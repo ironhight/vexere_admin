@@ -28,25 +28,25 @@ const TopNavigation = () => {
         </NavLink>
         <NavLink to="/manager/stations" activeClassName="activeClass">
           <MDBListGroupItem>
-            <MDBIcon icon="table" className="mr-3" />
+            <MDBIcon icon="warehouse" className="mr-3" />
             Quản lý Stations
           </MDBListGroupItem>
         </NavLink>
         <NavLink to="/manager/trips" activeClassName="activeClass">
           <MDBListGroupItem>
-            <MDBIcon icon="table" className="mr-3" />
+            <MDBIcon icon="bus-alt" className="mr-3" />
             Quản lý Trips
           </MDBListGroupItem>
         </NavLink>
         <NavLink to="/manager/tickets" activeClassName="activeClass">
           <MDBListGroupItem>
-            <MDBIcon icon="table" className="mr-3" />
+            <MDBIcon icon="ticket-alt" className="mr-3" />
             Quản lý Tickets
           </MDBListGroupItem>
         </NavLink>
         <NavLink to="/manager/users" activeClassName="activeClass">
           <MDBListGroupItem>
-            <MDBIcon icon="map" className="mr-3" />
+            <MDBIcon icon="users" className="mr-3" />
             Quản lý Users
           </MDBListGroupItem>
         </NavLink>

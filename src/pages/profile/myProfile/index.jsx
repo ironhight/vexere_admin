@@ -21,9 +21,9 @@ class myProfile extends PureComponent {
       <div className="container">
         <BodyWrapper>
           <div className="row">
-            <div className="col-3">
+            {/* <div className="col-3">
               <Skeleton active avatar paragraph={{ rows: 4 }} />
-            </div>
+            </div> */}
             <div className="col-9">
               <Wrapper>
                 <h5 className="font-weight-normal d-flex align-items-center mb-4">

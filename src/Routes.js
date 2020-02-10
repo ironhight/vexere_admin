@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage";
-import ProfilePage from "./pages/ProfilePage";
+import ProfilePage from "./pages/profile/myProfile/index";
 import StationsPage from "./pages/StationsPage";
 import TripsPage from "./pages/TripsPage";
 import TicketsPage from "./pages/TicketsPage";

@@ -5,26 +5,39 @@ import * as userActions from "../../../redux/actions/users";
 import { Wrapper, BodyWrapper } from "../../../styled";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import Button from "@material-ui/core/Button";
+import UpdateIcon from "@material-ui/icons/Update";
 
-class myProfile extends PureComponent {
+class MyProfile extends PureComponent {
   componentDidMount() {
     const { auth } = this.props;
-    let userID = auth.profile.id;
-    this.props.getProfileAdmin(userID);
+
+    // let userId = match.params.id;
+
+    // if (_.isEmpty(match.params)) {
+    //   userId = auth.user.id;
+    // }
+
+    this.props.getProfileAdmin(auth.profile.id);
   }
 
   render() {
     const { userInfo, auth } = this.props;
     const { user } = userInfo;
-
     return (
-      <div className="container">
+      <div>
         <BodyWrapper>
           <div className="row">
             {/* <div className="col-3">
               <Skeleton active avatar paragraph={{ rows: 4 }} />
             </div> */}
             <div className="col-9">
+              {/* <Skeleton
+                active
+                avatar
+                loading={userInfo.isLoading}
+                paragraph={{ rows: 4 }}
+              > */}
               <Wrapper>
                 <h5 className="font-weight-normal d-flex align-items-center mb-4">
                   <Icon type="user" className="mr-1" />
@@ -47,6 +60,19 @@ class myProfile extends PureComponent {
                   <div className="col-sm-9">{user.phoneNumber}</div>
                 </div>
               </Wrapper>
+              {/* </Skeleton> */}
+            </div>
+            <div className="col-3">
+              <Button
+                variant="contained"
+                color="primary"
+                endIcon={<UpdateIcon />}
+                onClick={() =>
+                  this.props.history.push(`/admin/profile/edit-profile`)
+                }
+              >
+                Update
+              </Button>
             </div>
           </div>
         </BodyWrapper>
@@ -62,4 +88,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, userActions)(withRouter(myProfile));
+export default connect(mapStateToProps, userActions)(withRouter(MyProfile));

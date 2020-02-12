@@ -27,16 +27,27 @@ export const getProfileAdmin = userID => dispatch => {
 //     .catch(console.log());
 // };
 
-// export const deleteUser = id => dispatch => {
-//   api
-//     .get("/users", id)
-//     .then(res => {
-//       dispatch({
-//         type: "DELETE_USER",
-//         payload: res.data
-//       });
-//     })
-//     .catch(console.log());
-// };
-
-// export const editUser = ()
+export const updateAdmin = (
+  userID,
+  value,
+  callbackThen,
+  callbackCatch
+) => dispatch => {
+  return api
+    .put(`users/${userID}`, value)
+    .then(res => {
+      dispatch({
+        type: types.UPDATE_PROFILE_ADMIN,
+        payload: res.data
+      });
+      Promise.resolve(res.data);
+      swal({
+        text: "Update successfully",
+        icon: "success",
+        buttons: false,
+        timer: 1500
+      });
+      callbackThen();
+    })
+    .catch(err => callbackCatch(err));
+};

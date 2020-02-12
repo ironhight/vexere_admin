@@ -8,6 +8,10 @@ import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import rootReducer from "./redux/reducers";
 
+import "antd/dist/antd.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "react-toastify/dist/ReactToastify.css";
+
 const initialState = {};
 const middlwwares = [thunk];
 

@@ -5,13 +5,14 @@ export const Wrapper = styled.div`
   border-radius: 3px;
   padding: 16px;
   box-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
-
+  font-size: 16px;
+  color: #212529;
   .ant-empty-normal {
     margin-bottom: 0;
   }
 `;
 
 export const BodyWrapper = styled.div`
-  margin: 32px auto;
+  margin: auto;
   flex-grow: 1;
 `;

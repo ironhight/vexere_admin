@@ -37,12 +37,12 @@ class EditProfile extends PureComponent {
                   isLoading={user.isLoading}
                 />
               </Skeleton>
-              {/* <h5 className="font-weight-normal d-flex align-items-center mb-4 mt-5">
+              <h5 className="font-weight-normal d-flex align-items-center mb-4 mt-5">
                 <Icon type="lock" className="mr-1" /> Change password
-              </h5> */}
-              {/* <Skeleton loading={user.isLoading} active paragraph={{ rows: 6 }}>
+              </h5>
+              <Skeleton loading={user.isLoading} active paragraph={{ rows: 6 }}>
                 <PasswordForm id={user._id} />
-              </Skeleton> */}
+              </Skeleton>
             </Wrapper>
           </div>
         </BodyWrapper>

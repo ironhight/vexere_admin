@@ -14,19 +14,6 @@ export const getProfileAdmin = userID => dispatch => {
     .catch(console.log());
 };
 
-//get all User
-// export const getUsers = () => dispatch => {
-//   api
-//     .get("/users")
-//     .then(res => {
-//       dispatch({
-//         type: "GET_USERS",
-//         payload: res.data
-//       });
-//     })
-//     .catch(console.log());
-// };
-
 export const updateAdmin = (
   userID,
   value,
@@ -48,6 +35,30 @@ export const updateAdmin = (
         timer: 1500
       });
       callbackThen();
+    })
+    .catch(err => callbackCatch(err));
+};
+
+export const updatePassword = (
+  userID,
+  value,
+  callbackThen,
+  callbackReset,
+  callbackCatch
+) => dispatch => {
+  return api
+    .put(`users/change-password/${userID}`, value)
+    .then(res => {
+      dispatch({ type: types.UPDATE_PASSWORD_ADMIN, payload: res.data });
+      Promise.resolve(res.data);
+      swal({
+        text: "Update successfully",
+        icon: "success",
+        buttons: false,
+        timer: 1500
+      });
+      callbackThen();
+      callbackReset();
     })
     .catch(err => callbackCatch(err));
 };

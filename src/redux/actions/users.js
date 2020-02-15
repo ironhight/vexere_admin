@@ -62,3 +62,21 @@ export const updatePassword = (
     })
     .catch(err => callbackCatch(err));
 };
+
+export const updateAvatar = (value, callbackThen) => dispatch => {
+  api
+    .post(`users/upload-avatar`, value)
+    .then(res => {
+      dispatch({ type: types.UPDATE_AVATAR, payload: res.data });
+      swal({
+        text: "Update successfully",
+        icon: "success",
+        buttons: false,
+        timer: 1500
+      });
+      callbackThen();
+    })
+    .catch(err => {
+      console.log(err.response);
+    });
+};

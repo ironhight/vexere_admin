@@ -13,7 +13,7 @@ import {
   MDBBtn,
   MDBIcon
 } from "mdbreact";
-import src1 from "../assets/img-1.jpg";
+import src1 from "../assets/images/img-1.jpg";
 
 const ProfilePage = () => {
   return (

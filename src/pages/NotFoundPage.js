@@ -1,6 +1,6 @@
 import React from "react";
 import { MDBCol, MDBRow } from "mdbreact";
-import logo from "../assets/logo.svg";
+import logo from "../assets/images/logo.svg";
 
 const NotFoundPage = () => {
   return (

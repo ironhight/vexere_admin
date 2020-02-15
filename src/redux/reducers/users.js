@@ -31,6 +31,11 @@ const usersReducer = (state = initialState, action) => {
       });
       return dataPersonal;
 
+    case types.UPDATE_AVATAR:
+      let avatar = { ...state };
+      avatar.user.avatar = action.payload.avatar;
+      return avatar;
+
     default:
       return state;
   }

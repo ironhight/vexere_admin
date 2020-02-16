@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as stationActions from "../redux/actions/stations";
 import Authenticate from "../HOC/Authenticate";
+import CreateStation from "../components/Station/CreateStation";
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -14,8 +15,6 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
-
-// import CreateStation from "../Manager/Station/CreateStation";
 
 class StationsPage extends Component {
   componentDidMount() {
@@ -68,7 +67,7 @@ class StationsPage extends Component {
     return (
       <div>
         <h1>QUẢN LÝ STATIONS</h1>
-        {/* <CreateStation /> */}
+        <CreateStation />
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead>

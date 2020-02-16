@@ -7,6 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import * as stationActions from "../../redux/actions/stations";
 import { connect } from "react-redux";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 
 function CreateStation({ createStation }) {
   const [input, setInput] = useState({ name: "", address: "", province: "" });
@@ -36,7 +37,12 @@ function CreateStation({ createStation }) {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        color="primary"
+        endIcon={<AddBoxIcon />}
+        onClick={handleClickOpen}
+      >
         Thêm Station
       </Button>
       <Dialog

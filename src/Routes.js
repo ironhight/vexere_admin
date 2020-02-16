@@ -8,6 +8,8 @@ import TicketsPage from "./pages/TicketsPage";
 import UsersPage from "./pages/UsersPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import EditProfile from "./pages/profile/editProfile/EditProfile";
+import UpdateStation from "./pages/UpdateStation";
+import CreateTrip from "./pages/CreateTrip";
 
 class Routes extends React.Component {
   render() {
@@ -21,7 +23,14 @@ class Routes extends React.Component {
           component={EditProfile}
         />
         <Route path="/manager/stations" exact component={StationsPage} />
+        <Route
+          path="/manager/stations/:stationId/update-station"
+          exact
+          component={UpdateStation}
+        />
+
         <Route path="/manager/trips" exact component={TripsPage} />
+        <Route path="/manager/trips/create-trip" exact component={CreateTrip} />
         <Route path="/manager/tickets" exact component={TicketsPage} />
         <Route path="/manager/users" exact component={UsersPage} />
         <Route path="/404" exact component={NotFoundPage} />

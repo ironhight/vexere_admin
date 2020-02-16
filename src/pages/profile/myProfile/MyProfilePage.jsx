@@ -36,7 +36,10 @@ class MyProfile extends PureComponent {
                 loading={userInfo.isLoading}
                 paragraph={{ rows: 4 }}
               >
-                <AvatarWrapper fullName={user.fullName} avatar={user.avatar} />
+                <AvatarWrapper
+                  fullName={user.fullName}
+                  avatar={"http://localhost:6789/" + user.avatar}
+                />
               </Skeleton>
             </div>
             <div className="col-7">

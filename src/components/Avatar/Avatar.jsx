@@ -39,7 +39,9 @@ class AvatarWrapper extends PureComponent {
   };
 
   render() {
-    const { avatar, fullName, isMyProfile = false } = this.props;
+    console.log("object");
+    const { avatar, fullName, isMyProfile = true } = this.props;
+    console.log("TCL: AvatarWrapper -> render -> isMyProfile", isMyProfile);
     const { isLoading } = this.state;
 
     return (

@@ -1,27 +1,32 @@
-import * as types from "../constants/actionTypes"
+import * as types from "../constants/actionTypes";
 
-const initialState = []
+const initialState = [];
 
 const stationsReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case types.CREATE_STATION:
-            return [...state, action.payload]
+  switch (action.type) {
+    case types.CREATE_STATION:
+      return [...state, action.payload];
 
-        case types.GET_STATIONS:
-            return action.payload
+    case types.GET_STATIONS:
+      return action.payload;
 
-        case types.UPDATE_STATION:
-            const station = action.payload
-            const index = state.findIndex(st => st.id === station.id)
-            state[index] = station
-            return [...state]
+    case types.UPDATE_STATION:
+      const station = action.payload;
+      const index = state.findIndex(st => st.id === station.id);
+      state[index] = station;
+      return [...state];
 
-        case types.DELETE_STATION:
-            // splice : mang goc thay doi
-            // slice: mang goc ko thay doi
-            return state.filter(st => st._id !== action.payload)
-        default: return state
-    }
-}
+    case types.DELETE_STATION:
+      // splice : mang goc thay doi
+      // slice: mang goc ko thay doi
+      return state.filter(st => st._id !== action.payload);
 
-export default stationsReducer
+    case types.GET_PAGINATION_STATIONS:
+      return action.payload;
+
+    default:
+      return state;
+  }
+};
+
+export default stationsReducer;

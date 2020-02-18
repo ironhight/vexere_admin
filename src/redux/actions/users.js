@@ -6,6 +6,7 @@ export const getProfileAdmin = userID => dispatch => {
   return api
     .get(`/users/${userID}`)
     .then(res => {
+      console.log("TCL: res.data", res.data);
       dispatch({
         type: types.GET_PROFILE_ADMIN,
         payload: res.data

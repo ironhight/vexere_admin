@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StationItem from "../components/Station/StationItem";
 import Pagination from "../components/Pagination";
+import * as stationActions from "../redux/actions/stations";
 import { connect } from "react-redux";
 
 class PaginationStations extends Component {
@@ -17,6 +18,7 @@ class PaginationStations extends Component {
   }
 
   componentDidMount() {
+    this.props.getStations();
     this.setState({ totalRecords: this.props.stations.length });
   }
 
@@ -24,7 +26,7 @@ class PaginationStations extends Component {
     let result = null;
     if (stations.length > 0) {
       result = stations.map((station, index) => {
-        return <StationItem key={index} station={station} index={index} />;
+        return <StationItem key={index} stations={station} index={index} />;
       });
     }
     return result;
@@ -119,4 +121,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(null, mapStateToProps)(PaginationStations);
+export default connect(mapStateToProps, stationActions)(PaginationStations);

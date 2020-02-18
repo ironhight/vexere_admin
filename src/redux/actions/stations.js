@@ -50,3 +50,15 @@ export const deleteStation = _id => dispatch => {
     })
     .catch(console.log());
 };
+
+export const paginationStations = query => dispatch => {
+  return api
+    .get(`/stations/paginated/${query}`)
+    .then(res => {
+      dispatch({
+        type: types.GET_PAGINATION_STATIONS,
+        payload: res.data
+      });
+    })
+    .catch(console.log());
+};

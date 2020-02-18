@@ -23,7 +23,7 @@ class Routes extends React.Component {
           exact
           component={EditProfile}
         />
-        <Route path="/manager/stations" exact component={StationsPage} />
+        <Route path="/manager/stations" exact component={PaginationStations} />
         <Route
           path="/manager/stations/:stationId/update-station"
           exact
@@ -33,7 +33,7 @@ class Routes extends React.Component {
         <Route path="/manager/trips" exact component={TripsPage} />
         <Route path="/manager/trips/create-trip" exact component={CreateTrip} />
         <Route path="/manager/tickets" exact component={TicketsPage} />
-        <Route path="/manager/users" exact component={PaginationStations} />
+        <Route path="/manager/users" exact component={UsersPage} />
         <Route path="/404" exact component={NotFoundPage} />
       </Switch>
     );

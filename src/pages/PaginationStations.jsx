@@ -4,6 +4,17 @@ import Pagination from "../components/Pagination";
 import * as stationActions from "../redux/actions/stations";
 import { connect } from "react-redux";
 
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+
+import CreateStation from "../components/Station/CreateStation";
+import "./styles.css";
+
 class PaginationStations extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +37,7 @@ class PaginationStations extends Component {
     let result = null;
     if (stations.length > 0) {
       result = stations.map((station, index) => {
-        return <StationItem key={index} stations={station} index={index} />;
+        return <StationItem key={index} station={station} index={index} />;
       });
     }
     return result;
@@ -57,8 +68,10 @@ class PaginationStations extends Component {
       <div className="section product_list_mng">
         <div className="container-fluid">
           <div className="box_product_control mb-15">
+            <h1>QUẢN LÝ STATIONS</h1>
+            <CreateStation />
             <div className="row">
-              <div className="col-xs-12 box_change_pagelimit">
+              <div className="col-xs-12 box_change_pagelimit mt-15">
                 Hiển thị
                 <select
                   className="form-control"
@@ -77,7 +90,8 @@ class PaginationStations extends Component {
               </div>
             </div>
           </div>
-          <div className="box_tbl_list">
+
+          {/* <div className="box_tbl_list">
             <table className="table table-bordered table-hover">
               <thead>
                 <tr>
@@ -90,7 +104,23 @@ class PaginationStations extends Component {
               </thead>
               <tbody>{this.showStations(rowsPerPage)}</tbody>
             </table>
-          </div>
+          </div> */}
+
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">Số thứ tự</TableCell>
+                  <TableCell align="right">Tên bến xe</TableCell>
+                  <TableCell align="right">Địa chỉ</TableCell>
+                  <TableCell align="right">Tỉnh thành</TableCell>
+                  <TableCell align="center">Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{this.showStations(rowsPerPage)}</TableBody>
+            </Table>
+          </TableContainer>
+
           <div className="box_pagination">
             <div className="row">
               <div className="col-xs-12 box_pagination_info text-right">
@@ -98,7 +128,7 @@ class PaginationStations extends Component {
                   {stations.length} stations | Trang {currentPage}/{totalPages}
                 </p>
               </div>
-              <div className="col-xs-12 text-center">
+              <div className="col-xs-12 text-center ml-30">
                 <Pagination
                   totalRecords={stations.length}
                   pageLimit={pageLimit || 5}

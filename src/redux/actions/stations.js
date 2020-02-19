@@ -15,7 +15,7 @@ export const createStation = data => dispatch => {
 };
 
 export const getStations = () => dispatch => {
-  api
+  return api
     .get("/stations")
     .then(res => {
       dispatch({

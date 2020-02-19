@@ -65,7 +65,7 @@ export const updatePassword = (
 };
 
 export const updateAvatar = (value, callbackThen) => dispatch => {
-  api
+  return api
     .post(`users/upload-avatar`, value)
     .then(res => {
       dispatch({ type: types.UPDATE_AVATAR, payload: res.data });

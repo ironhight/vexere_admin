@@ -5,8 +5,7 @@
 - This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 - You can login, change profile, manager(CRUD): Trip, Station, Ticket, User
 - Interactive with API from project : https://github.com/ironhight/backend_vexere . You must download and run 2 project at the same time
-- Account for admin: `namtayemthatchac@gmail.com`
-- Password for admin: `123456`
+- Create account and password for admin.
 
 ![dashboard](https://user-images.githubusercontent.com/56241790/74538037-de6df880-4f6d-11ea-8a79-fc086dec6b51.png)
 

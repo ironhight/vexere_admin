@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import jwtDecode from "jwt-decode";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import jwtDecode from 'jwt-decode';
+import { withRouter } from 'react-router-dom';
 
 /**
  * Return false when no have token and token expred, Ngược lại return true.
@@ -9,7 +9,7 @@ import { withRouter } from "react-router-dom";
  * getTime() return về mini giây của kiểu numbericday
  */
 const checkTokenValid = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('Authorization');
   if (!token) return false;
   const decoded = jwtDecode(token);
   if (decoded.exp < new Date().getTime() / 1000) return false; //token ket han
@@ -19,12 +19,12 @@ const checkTokenValid = () => {
 /**
  * @todo: take a component and return a new component
  */
-export default function(ComposedComponent) {
+export default function (ComposedComponent) {
   class Authenticate extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        auth: {}
+        auth: {},
       };
     }
 
@@ -35,9 +35,9 @@ export default function(ComposedComponent) {
         props.auth.isAuthenticated !== state.auth.isAuthenticated &&
         !checkTokenValid()
       ) {
-        if (!props.auth.isAuthenticated) props.history.push("/");
+        if (!props.auth.isAuthenticated) props.history.push('/');
         return {
-          auth: props.auth
+          auth: props.auth,
         };
       }
       return null;
@@ -52,9 +52,9 @@ export default function(ComposedComponent) {
     }
   }
 
-  const mapStateToProps = state => {
+  const mapStateToProps = (state) => {
     return {
-      auth: state.auth
+      auth: state.auth,
     };
   };
   return withRouter(connect(mapStateToProps)(Authenticate));

@@ -1,15 +1,15 @@
-import * as types from "../constants/actionTypes";
-import _ from "lodash";
+import * as types from '../constants/actionTypes';
+import _ from 'lodash';
 
 const initialState = {
   isLoading: true,
   user: {
-    _id: "",
-    email: "",
+    _id: '',
+    email: '',
     dayOfBirth: null,
-    phoneNumber: "",
-    fullName: ""
-  }
+    phoneNumber: '',
+    fullName: '',
+  },
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -18,7 +18,7 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        user: action.payload
+        user: action.payload,
       };
 
     case types.UPDATE_PROFILE_ADMIN:
@@ -26,7 +26,7 @@ const usersReducer = (state = initialState, action) => {
 
       const keyArr = Object.keys(action.payload);
 
-      _.forEach(keyArr, function(value) {
+      _.forEach(keyArr, function (value) {
         dataPersonal.user[value] = action.payload[value];
       });
       return dataPersonal;
@@ -34,6 +34,7 @@ const usersReducer = (state = initialState, action) => {
     case types.UPDATE_AVATAR:
       let avatar = { ...state };
       avatar.user.avatar = action.payload.avatar;
+      // return { ...state, avatar, isLoading: false }
       return avatar;
 
     default:

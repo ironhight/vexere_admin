@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import jwtDecode from "jwt-decode";
-import setAuthToken from "./utils/setAuthToken";
-import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/actions/auth";
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import setAuthToken from './utils/setAuthToken';
+import { connect } from 'react-redux';
+import { setCurrentUser } from './redux/actions/auth';
 
 //core component
-import LoginPage from "./pages/LoginPage";
-import Manager from "./pages";
+import LoginPage from './pages/LoginPage';
+import Manager from './pages';
 // import Navbar from "./components/Navbar/index";
 // import Manager from "./components/Manager/index";
 // import Profile from "./components/Profile";
@@ -20,14 +20,14 @@ import Manager from "./pages";
 // import Footer from "./components/Footer";
 
 //css
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "bootstrap-css-only/css/bootstrap.min.css";
-import "mdbreact/dist/css/mdb.css";
-import "./index.css";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+import './index.css';
 
 class App extends Component {
   constructor(props) {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('Authorization');
     if (token) {
       const decoded = jwtDecode(token);
       if (decoded.exp > new Date().getTime() / 1000) {
@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('Authorization');
     if (token) {
       const decoded = jwtDecode(token);
       if (decoded.exp > new Date().getTime() / 1000) {
@@ -60,7 +60,7 @@ class App extends Component {
             <Route
               path="/"
               exact
-              render={props => {
+              render={(props) => {
                 if (isAuthenticated) return <Redirect to="/admin/dashboard" />;
                 return <LoginPage {...props} />;
               }}
@@ -73,17 +73,17 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    setCurrentUser: decoded => {
+    setCurrentUser: (decoded) => {
       dispatch(setCurrentUser(decoded));
-    }
+    },
   };
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
   };
 };
 

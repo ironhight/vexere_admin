@@ -1,30 +1,30 @@
-import React, { Component } from "react";
-import StationItem from "../components/Station/StationItem";
-import Pagination from "../components/Pagination";
-import * as stationActions from "../redux/actions/stations";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import StationItem from '../components/Station/StationItem';
+import Pagination from '../components/Pagination';
+import * as stationActions from '../redux/actions/stations';
+import { connect } from 'react-redux';
 
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
-import CreateStation from "../components/Station/CreateStation";
-import "./styles.css";
+import CreateStation from '../components/Station/CreateStation';
+import './styles.css';
 
 class PaginationStations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalRecords: "",
-      totalPages: "",
-      pageLimit: "",
-      currentPage: "",
-      startIndex: "",
-      endIndex: ""
+      totalRecords: '',
+      totalPages: '',
+      pageLimit: '',
+      currentPage: '',
+      startIndex: '',
+      endIndex: '',
     };
   }
 
@@ -33,7 +33,7 @@ class PaginationStations extends Component {
     this.setState({ totalRecords: this.props.stations.length });
   }
 
-  showStations = stations => {
+  showStations = (stations) => {
     let result = null;
     if (stations.length > 0) {
       result = stations.map((station, index) => {
@@ -43,27 +43,31 @@ class PaginationStations extends Component {
     return result;
   };
 
-  onChangePage = data => {
+  onChangePage = (data) => {
     this.setState({
       pageLimit: data.pageLimit,
       totalPages: data.totalPages,
       currentPage: data.page,
       startIndex: data.startIndex,
-      endIndex: data.endIndex
+      endIndex: data.endIndex,
     });
   };
 
   render() {
     let { stations } = this.props;
+    // console.log('PaginationStations -> render -> stations', stations);
     let {
       totalPages,
       currentPage,
       pageLimit,
       startIndex,
-      endIndex
+      endIndex,
     } = this.state;
     let rowsPerPage = [];
-    rowsPerPage = stations.slice(startIndex, endIndex + 1);
+    if (stations.results) {
+      stations = stations.results;
+      rowsPerPage = stations.slice(startIndex, endIndex + 1);
+    }
     return (
       <div className="section product_list_mng">
         <div className="container-fluid">
@@ -76,7 +80,7 @@ class PaginationStations extends Component {
                 <select
                   className="form-control"
                   value={pageLimit}
-                  onChange={e =>
+                  onChange={(e) =>
                     this.setState({ pageLimit: parseInt(e.target.value) })
                   }
                 >
@@ -145,9 +149,9 @@ class PaginationStations extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    stations: state.stations
+    stations: state.stations,
   };
 };
 

@@ -1,5 +1,5 @@
-import React from "react";
-import { MDBFooter, MDBIcon } from "mdbreact";
+import React from 'react';
+import { MDBFooter, MDBIcon } from 'mdbreact';
 
 const Footer = () => {
   return (
@@ -21,7 +21,7 @@ const Footer = () => {
       </div>
       <p className="footer-copyright mb-0 py-3 text-center">
         &copy; {new Date().getFullYear()} Copyright:
-        <a href="/"> ironHight </a>
+        <a href="/"> ironhight </a>
       </p>
     </MDBFooter>
   );

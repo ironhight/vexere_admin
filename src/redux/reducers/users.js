@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 const initialState = {
   isLoading: true,
+  avatar: '',
   user: {
     _id: '',
     email: '',
@@ -32,11 +33,12 @@ const usersReducer = (state = initialState, action) => {
       return dataPersonal;
 
     case types.UPDATE_AVATAR:
-      let avatar = { ...state };
-      avatar.user.avatar = action.payload.avatar;
-      // return { ...state, avatar, isLoading: false }
-      return avatar;
+      return {
+        ...state,
+      };
 
+    case types.GET_AVATAR:
+      return { ...state, avatar: action.payload };
     default:
       return state;
   }

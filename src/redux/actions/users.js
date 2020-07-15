@@ -77,3 +77,14 @@ export const updateAvatar = (value, callbackThen) => (dispatch) => {
       console.log(err.response);
     });
 };
+
+export const getAvatar = (id) => (dispatch) => {
+  return api
+    .get(`users/me/${id}/avatar`)
+    .then((res) => {
+      dispatch({ type: types.GET_AVATAR, payload: res.data });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};

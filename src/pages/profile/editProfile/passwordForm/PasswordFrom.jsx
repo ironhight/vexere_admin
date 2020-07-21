@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { string, object, ref } from "yup";
-import { Formik, Field } from "formik";
-import { Form, Input, Button, Spin } from "antd";
-import _ from "lodash";
-import api from "../../../../api";
-import swal from "sweetalert";
+import React, { Component } from 'react';
+import { string, object, ref } from 'yup';
+import { Formik, Field } from 'formik';
+import { Form, Input, Button, Spin } from 'antd';
+import _ from 'lodash';
+import api from '../../../../api';
+import swal from 'sweetalert';
 const FormItem = Form.Item;
 
 class PasswordForm extends Component {
@@ -13,35 +13,35 @@ class PasswordForm extends Component {
     return (
       <Formik
         initialValues={{
-          password: "",
-          newPassword: "",
-          verifyNewPassword: ""
+          password: '',
+          newPassword: '',
+          verifyNewPassword: '',
         }}
         validationSchema={object().shape({
           password: string()
-            .required("Password is required")
-            .min(3, "Password must have min 3 characters"),
+            .required('Password is required')
+            .min(3, 'Password must have min 3 characters'),
           verifyNewPassword: string()
-            .required("Verify new password is required")
-            .oneOf([ref("verifyNewPassword"), null], "New password must match"),
-          newPassword: string().required("New password is required")
+            .required('Verify new password is required')
+            .oneOf([ref('verifyNewPassword'), null], 'New password must match'),
+          newPassword: string().required('New password is required'),
         })}
         onSubmit={(values, { setFieldError, resetForm, setSubmitting }) => {
           api
-            .put(`users/change-password/${id}`, values)
+            .patch(`users/change-password/me`, values)
             .then(() => {
               swal({
-                text: "Update successfully",
-                icon: "success",
+                text: 'Update successfully',
+                icon: 'success',
                 buttons: false,
-                timer: 1500
+                timer: 1500,
               });
               setSubmitting(false);
               resetForm();
             })
-            .catch(err => {
+            .catch((err) => {
               setSubmitting(false);
-              _.map(Object.keys(err.response.data), field => {
+              _.map(Object.keys(err.response.data), (field) => {
                 setFieldError(field, err.response.data[field]);
               });
             });
@@ -58,7 +58,7 @@ class PasswordForm extends Component {
                 <div className="col-9">
                   <FormItem
                     validateStatus={
-                      touched.password && errors.password && "error"
+                      touched.password && errors.password && 'error'
                     }
                     help={touched.password && errors.password}
                   >
@@ -85,7 +85,7 @@ class PasswordForm extends Component {
                 <div className="col-9">
                   <FormItem
                     validateStatus={
-                      touched.newPassword && errors.newPassword && "error"
+                      touched.newPassword && errors.newPassword && 'error'
                     }
                     help={touched.newPassword && errors.newPassword}
                   >
@@ -114,7 +114,7 @@ class PasswordForm extends Component {
                     validateStatus={
                       touched.verifyNewPassword &&
                       errors.verifyNewPassword &&
-                      "error"
+                      'error'
                     }
                     help={touched.verifyNewPassword && errors.verifyNewPassword}
                   >

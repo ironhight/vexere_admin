@@ -1,41 +1,43 @@
-import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import { connect } from "react-redux";
-import * as stationActions from "../redux/actions/stations";
+import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { connect } from 'react-redux';
+import * as stationActions from '../redux/actions/stations';
 
 class UpdateStation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      address: "",
-      province: ""
+      name: '',
+      address: '',
+      province: '',
     };
   }
 
   componentDidMount() {
     const stationId = this.props.match.params.stationId;
-    const station = this.props.stations.find(st => st._id === stationId);
+    const station = this.props.stations.results.find(
+      (st) => st._id === stationId
+    );
     if (station) {
       this.setState(station);
     }
   }
 
-  onChange = e => {
+  onChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
     const { _id, name, address, province } = this.state;
-    const data = { _id, name, address, province };
+    const data = { name, address, province };
     this.props
-      .updateStation(data)
-      .then(() => this.props.history.push("/manager/stations"))
-      .catch(err => console.log(err));
+      .updateStation(_id, data)
+      .then(() => this.props.history.push('/manager/stations'))
+      .catch((err) => console.log(err));
   };
 
   render() {
@@ -47,7 +49,7 @@ class UpdateStation extends Component {
           <TextField
             id="standard-basic"
             label="name"
-            style={{ margin: "15px" }}
+            style={{ margin: '15px' }}
             name="name"
             value={name}
             onChange={this.onChange}
@@ -58,7 +60,7 @@ class UpdateStation extends Component {
             type="text"
             id="standard-basic"
             label="address"
-            style={{ margin: "15px" }}
+            style={{ margin: '15px' }}
             name="address"
             value={address}
             onChange={this.onChange}
@@ -69,7 +71,7 @@ class UpdateStation extends Component {
             type="text"
             id="standard-basic"
             label="province"
-            style={{ margin: "15px" }}
+            style={{ margin: '15px' }}
             name="province"
             value={province}
             onChange={this.onChange}
@@ -80,7 +82,7 @@ class UpdateStation extends Component {
             variant="contained"
             color="primary"
             type="submit"
-            style={{ margin: "15px" }}
+            style={{ margin: '15px' }}
           >
             Submit
           </Button>
@@ -90,9 +92,9 @@ class UpdateStation extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    stations: state.stations
+    stations: state.stations,
   };
 };
 

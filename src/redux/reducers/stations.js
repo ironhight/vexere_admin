@@ -1,25 +1,28 @@
-import * as types from "../constants/actionTypes";
+import * as types from '../constants/actionTypes';
 
-const initialState = [];
+const initialState = {
+  results: [],
+};
 
 const stationsReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.CREATE_STATION:
-      return [...state, action.payload];
+      state.results.push(action.payload);
+      return { ...state };
 
     case types.GET_STATIONS:
       return action.payload;
 
     case types.UPDATE_STATION:
       const station = action.payload;
-      const index = state.findIndex(st => st.id === station.id);
-      state[index] = station;
-      return [...state];
+      const index = state.results.findIndex((st) => st._id === station._id);
+      state.results[index] = station;
+      return { ...state };
 
     case types.DELETE_STATION:
-      // splice : mang goc thay doi
-      // slice: mang goc ko thay doi
-      return state.filter(st => st._id !== action.payload);
+      const newState = state.results.filter((st) => st._id !== action.payload);
+
+      return { results: newState };
 
     case types.GET_PAGINATION_STATIONS:
       return action.payload;

@@ -18,7 +18,7 @@ export const updateAdmin = (userID, value, callbackThen, callbackCatch) => (
   dispatch
 ) => {
   return api
-    .put(`users/${userID}`, value)
+    .patch(`users/me`, value)
     .then((res) => {
       dispatch({
         type: types.UPDATE_PROFILE_ADMIN,
@@ -44,7 +44,7 @@ export const updatePassword = (
   callbackCatch
 ) => (dispatch) => {
   return api
-    .put(`users/change-password/${userID}`, value)
+    .put(`users/change-password/me`, value)
     .then((res) => {
       dispatch({ type: types.UPDATE_PASSWORD_ADMIN, payload: res.data });
       Promise.resolve(res.data);
@@ -60,9 +60,9 @@ export const updatePassword = (
     .catch((err) => callbackCatch(err));
 };
 
-export const updateAvatar = (value, callbackThen) => (dispatch) => {
+export const updateAvatar = (value, config, callbackThen) => (dispatch) => {
   return api
-    .post(`users/me/avatar`, value)
+    .post(`users/me/avatar`, value, config)
     .then((res) => {
       dispatch({ type: types.UPDATE_AVATAR, payload: res.data });
       swal({

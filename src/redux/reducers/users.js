@@ -3,13 +3,13 @@ import _ from 'lodash';
 
 const initialState = {
   isLoading: true,
-  avatar: '',
   user: {
     _id: '',
     email: '',
     dayOfBirth: null,
     phoneNumber: '',
     fullName: '',
+    avatar: '',
   },
 };
 
@@ -38,7 +38,7 @@ const usersReducer = (state = initialState, action) => {
       };
 
     case types.GET_AVATAR:
-      return { ...state, avatar: action.payload };
+      return { ...state, ...action.payload };
     default:
       return state;
   }

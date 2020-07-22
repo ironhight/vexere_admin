@@ -55,7 +55,7 @@ class PaginationStations extends Component {
 
   render() {
     let { stations } = this.props;
-    // console.log('PaginationStations -> render -> stations', stations);
+    console.log('PaginationStations -> render -> stations', stations);
     let {
       totalPages,
       currentPage,
@@ -94,21 +94,6 @@ class PaginationStations extends Component {
               </div>
             </div>
           </div>
-
-          {/* <div className="box_tbl_list">
-            <table className="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th className="text-center">STT</th>
-                  <th className="text-center">Tên bến xe</th>
-                  <th className="text-center">dia chi</th>
-                  <th className="text-center">tinh thanh</th>
-                  <th className="text-center">action</th>
-                </tr>
-              </thead>
-              <tbody>{this.showStations(rowsPerPage)}</tbody>
-            </table>
-          </div> */}
 
           <TableContainer component={Paper}>
             <Table aria-label="simple table">

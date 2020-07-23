@@ -58,7 +58,6 @@ class TripsPage extends Component {
               style={{ marginRight: '10px' }}
               onClick={async () => {
                 await this.props.deleteTrip(row._id);
-                // await this.props.getStations();
               }}
             >
               Delete

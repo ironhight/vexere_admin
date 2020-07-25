@@ -1,47 +1,38 @@
 import React, { PureComponent } from "react";
 import AvatarImg from "../../assets/images/user-ic.png";
 import { Avatar, UploadAvatar } from "./styled";
-import { Icon, Rate } from "antd";
-import moment from "moment";
+import { Icon } from "antd";
 import { withRouter } from "react-router-dom";
-import _ from "lodash";
 import { connect } from "react-redux";
-
-import { updateAvatar } from "../../redux/actions/users";
+import * as userActions from "../../redux/actions/users";
 
 class AvatarWrapper extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      isLoading: false,
-      file: null
-    };
+    this.state = { isLoading: false, file: null };
   }
 
-  onHandleAvatar = e => {
+  componentDidMount() {
+    const { id } = this.props;
+    this.props.getAvatar(id);
+  }
+
+  onHandleAvatar = (e) => {
     let file = e.target.files[0];
-    const { id, updateAvatar } = this.props;
     const formData = new FormData();
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data"
-      }
-    };
+    const config = { headers: { "content-type": "multipart/form-data" } };
+
     formData.append("avatar", file);
-    this.setState({
-      isLoading: true
-    });
-    updateAvatar(id, formData, config, () => {
-      this.setState({
-        isLoading: false
-      });
+
+    this.setState({ isLoading: true });
+    this.props.updateAvatar(formData, config, () => {
+      this.setState({ isLoading: false });
     });
   };
 
   render() {
-    console.log("object");
     const { avatar, fullName, isMyProfile = true } = this.props;
-    console.log("TCL: AvatarWrapper -> render -> isMyProfile", isMyProfile);
+    console.log("avatar", avatar);
     const { isLoading } = this.state;
 
     return (
@@ -50,12 +41,8 @@ class AvatarWrapper extends PureComponent {
           {isMyProfile ? (
             <UploadAvatar isLoading={isLoading}>
               <label className="cursor-point mb-0">
-                <img src={!avatar ? AvatarImg : avatar} alt="avatar" />
-                <input
-                  className="d-none"
-                  type="file"
-                  onChange={this.onHandleAvatar}
-                />
+                <img src={!avatar.avatar ? AvatarImg : avatar.avatar} alt="avatar" />
+                <input className="d-none" type="file" onChange={this.onHandleAvatar} />
               </label>
               <div className="btn-upload">
                 <Icon type={isLoading ? "loading" : "plus"} />
@@ -65,7 +52,7 @@ class AvatarWrapper extends PureComponent {
           ) : (
             <UploadAvatar isLoading={isLoading}>
               <label className="cursor-point mb-0">
-                <img src={!avatar ? AvatarImg : avatar} alt="avatar" />
+                <img src={!avatar.avatar ? AvatarImg : avatar.avatar} alt="avatar" />
               </label>
             </UploadAvatar>
           )}
@@ -75,4 +62,18 @@ class AvatarWrapper extends PureComponent {
     );
   }
 }
-export default connect(null, { updateAvatar })(withRouter(AvatarWrapper));
+
+const mapStateToProps = (state) => {
+  return {
+    avatar: state.users,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateAvatar: (value, config, cb) => dispatch(userActions.updateAvatar(value, config, cb)),
+    getAvatar: (id) => dispatch(userActions.getAvatar(id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AvatarWrapper));

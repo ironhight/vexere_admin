@@ -48,14 +48,14 @@ export const UploadAvatar = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    opacity: ${props => (props.isLoading ? 1 : 0)};
+    opacity: ${(props) => (props.isLoading ? 1 : 0)};
     transition: opacity 0.2s ease-in-out;
     pointer-events: none;
   }
 
   &:hover {
     .btn-upload {
-      opacity: 1;
+      opacity: 0.5;
     }
   }
 `;

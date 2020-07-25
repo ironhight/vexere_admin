@@ -12,13 +12,6 @@ import AvatarWrapper from "../../../components/Avatar/Avatar";
 class MyProfile extends PureComponent {
   componentDidMount() {
     const { auth } = this.props;
-
-    // let userId = match.params.id;
-
-    // if (_.isEmpty(match.params)) {
-    //   userId = auth.user.id;
-    // }
-
     this.props.getProfileAdmin(auth.profile.id);
   }
 
@@ -30,16 +23,8 @@ class MyProfile extends PureComponent {
         <BodyWrapper>
           <div className="row">
             <div className="col-3">
-              <Skeleton
-                active
-                avatar
-                loading={userInfo.isLoading}
-                paragraph={{ rows: 4 }}
-              >
-                <AvatarWrapper
-                  fullName={user.fullName}
-                  avatar={"http://localhost:6789/" + user.avatar}
-                />
+              <Skeleton active avatar loading={userInfo.isLoading} paragraph={{ rows: 4 }}>
+                <AvatarWrapper fullName={user.fullName} id={user._id} />
               </Skeleton>
             </div>
             <div className="col-7">
@@ -71,9 +56,7 @@ class MyProfile extends PureComponent {
                 variant="contained"
                 color="primary"
                 endIcon={<UpdateIcon />}
-                onClick={() =>
-                  this.props.history.push(`/admin/profile/edit-profile`)
-                }
+                onClick={() => this.props.history.push(`/admin/profile/edit-profile`)}
               >
                 Update
               </Button>
@@ -85,10 +68,10 @@ class MyProfile extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     auth: state.auth,
-    userInfo: state.users
+    userInfo: state.users,
   };
 };
 

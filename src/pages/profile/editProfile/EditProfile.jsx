@@ -6,7 +6,6 @@ import PersonalForm from "./personalForm/PersonalForm";
 import PasswordForm from "./passwordForm/PasswordFrom";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import _ from "lodash";
 
 class EditProfile extends PureComponent {
   componentDidMount() {
@@ -51,12 +50,10 @@ class EditProfile extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     auth: state.auth,
-    userInfo: state.users
+    userInfo: state.users,
   };
 };
-export default connect(mapStateToProps, { getProfileAdmin })(
-  withRouter(EditProfile)
-);
+export default connect(mapStateToProps, { getProfileAdmin })(withRouter(EditProfile));

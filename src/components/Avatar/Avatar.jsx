@@ -32,7 +32,6 @@ class AvatarWrapper extends PureComponent {
 
   render() {
     const { avatar, fullName, isMyProfile = true } = this.props;
-    console.log("avatar", avatar);
     const { isLoading } = this.state;
 
     return (

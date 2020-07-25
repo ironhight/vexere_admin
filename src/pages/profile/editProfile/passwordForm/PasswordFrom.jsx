@@ -1,38 +1,37 @@
-import React, { Component } from 'react';
-import { string, object, ref } from 'yup';
-import { Formik, Field } from 'formik';
-import { Form, Input, Button, Spin } from 'antd';
-import _ from 'lodash';
-import api from '../../../../api';
-import swal from 'sweetalert';
+import React, { Component } from "react";
+import { string, object, ref } from "yup";
+import { Formik, Field } from "formik";
+import { Form, Input, Button, Spin } from "antd";
+import _ from "lodash";
+import api from "../../../../api";
+import swal from "sweetalert";
 const FormItem = Form.Item;
 
 class PasswordForm extends Component {
   render() {
-    const { id } = this.props;
     return (
       <Formik
         initialValues={{
-          password: '',
-          newPassword: '',
-          verifyNewPassword: '',
+          password: "",
+          newPassword: "",
+          verifyNewPassword: "",
         }}
         validationSchema={object().shape({
           password: string()
-            .required('Password is required')
-            .min(3, 'Password must have min 3 characters'),
+            .required("Password is required")
+            .min(3, "Password must have min 3 characters"),
           verifyNewPassword: string()
-            .required('Verify new password is required')
-            .oneOf([ref('verifyNewPassword'), null], 'New password must match'),
-          newPassword: string().required('New password is required'),
+            .required("Verify new password is required")
+            .oneOf([ref("verifyNewPassword"), null], "New password must match"),
+          newPassword: string().required("New password is required"),
         })}
         onSubmit={(values, { setFieldError, resetForm, setSubmitting }) => {
           api
             .patch(`users/change-password/me`, values)
             .then(() => {
               swal({
-                text: 'Update successfully',
-                icon: 'success',
+                text: "Update successfully",
+                icon: "success",
                 buttons: false,
                 timer: 1500,
               });
@@ -51,15 +50,11 @@ class PasswordForm extends Component {
             <form onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-3 text-right">
-                  <label className="mb-0 ant-form-item-required">
-                    Password
-                  </label>
+                  <label className="mb-0 ant-form-item-required">Password</label>
                 </div>
                 <div className="col-9">
                   <FormItem
-                    validateStatus={
-                      touched.password && errors.password && 'error'
-                    }
+                    validateStatus={touched.password && errors.password && "error"}
                     help={touched.password && errors.password}
                   >
                     <Field
@@ -78,15 +73,11 @@ class PasswordForm extends Component {
               </div>
               <div className="row">
                 <div className="col-3 text-right">
-                  <label className="mb-0 ant-form-item-required">
-                    New password
-                  </label>
+                  <label className="mb-0 ant-form-item-required">New password</label>
                 </div>
                 <div className="col-9">
                   <FormItem
-                    validateStatus={
-                      touched.newPassword && errors.newPassword && 'error'
-                    }
+                    validateStatus={touched.newPassword && errors.newPassword && "error"}
                     help={touched.newPassword && errors.newPassword}
                   >
                     <Field
@@ -105,16 +96,12 @@ class PasswordForm extends Component {
               </div>
               <div className="row">
                 <div className="col-3 text-right">
-                  <label className="mb-0 ant-form-item-required">
-                    Verify new password
-                  </label>
+                  <label className="mb-0 ant-form-item-required">Verify new password</label>
                 </div>
                 <div className="col-9">
                   <FormItem
                     validateStatus={
-                      touched.verifyNewPassword &&
-                      errors.verifyNewPassword &&
-                      'error'
+                      touched.verifyNewPassword && errors.verifyNewPassword && "error"
                     }
                     help={touched.verifyNewPassword && errors.verifyNewPassword}
                   >

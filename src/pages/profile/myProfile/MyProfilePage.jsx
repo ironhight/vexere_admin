@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { Icon, Skeleton } from "antd";
-import _ from "lodash";
 import * as userActions from "../../../redux/actions/users";
 import { Wrapper, BodyWrapper } from "../../../styled";
 import { withRouter } from "react-router-dom";
@@ -16,7 +15,7 @@ class MyProfile extends PureComponent {
   }
 
   render() {
-    const { userInfo, auth } = this.props;
+    const { userInfo } = this.props;
     const { user } = userInfo;
     return (
       <div>

@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage";
 import ProfilePage from "./pages/profile/myProfile/MyProfilePage";
-import StationsPage from "./pages/StationsPage";
 import TripsPage from "./pages/TripsPage";
 import TicketsPage from "./pages/TicketsPage";
 import UsersPage from "./pages/UsersPage";
@@ -18,17 +17,9 @@ class Routes extends React.Component {
       <Switch>
         <Route path="/admin/dashboard" exact component={DashboardPage} />
         <Route path="/admin/profile" exact component={ProfilePage} />
-        <Route
-          path="/admin/profile/edit-profile"
-          exact
-          component={EditProfile}
-        />
+        <Route path="/admin/profile/edit-profile" exact component={EditProfile} />
         <Route path="/manager/stations" exact component={PaginationStations} />
-        <Route
-          path="/manager/stations/:stationId/update-station"
-          exact
-          component={UpdateStation}
-        />
+        <Route path="/manager/stations/:stationId/update-station" exact component={UpdateStation} />
 
         <Route path="/manager/trips" exact component={TripsPage} />
         <Route path="/manager/trips/create-trip" exact component={CreateTrip} />

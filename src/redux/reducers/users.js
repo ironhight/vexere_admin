@@ -1,15 +1,15 @@
-import * as types from '../constants/actionTypes';
-import _ from 'lodash';
+import * as types from "../constants/actionTypes";
+import _ from "lodash";
 
 const initialState = {
   isLoading: true,
   user: {
-    _id: '',
-    email: '',
+    _id: "",
+    email: "",
     dayOfBirth: null,
-    phoneNumber: '',
-    fullName: '',
-    avatar: '',
+    phoneNumber: "",
+    fullName: "",
+    avatar: "",
   },
 };
 
@@ -35,6 +35,7 @@ const usersReducer = (state = initialState, action) => {
     case types.UPDATE_AVATAR:
       return {
         ...state,
+        ...action.payload,
       };
 
     case types.GET_AVATAR:

@@ -1,6 +1,6 @@
-import api from '../../api';
-import swal from 'sweetalert';
-import * as types from '../constants/actionTypes';
+import api from "../../api";
+import swal from "sweetalert";
+import * as types from "../constants/actionTypes";
 
 export const getProfileAdmin = (userID) => (dispatch) => {
   return api
@@ -14,9 +14,7 @@ export const getProfileAdmin = (userID) => (dispatch) => {
     .catch(console.log());
 };
 
-export const updateAdmin = (userID, value, callbackThen, callbackCatch) => (
-  dispatch
-) => {
+export const updateAdmin = (userID, value, callbackThen, callbackCatch) => (dispatch) => {
   return api
     .patch(`users/me`, value)
     .then((res) => {
@@ -26,8 +24,8 @@ export const updateAdmin = (userID, value, callbackThen, callbackCatch) => (
       });
       Promise.resolve(res.data);
       swal({
-        text: 'Update successfully',
-        icon: 'success',
+        text: "Update successfully",
+        icon: "success",
         buttons: false,
         timer: 1500,
       });
@@ -36,21 +34,17 @@ export const updateAdmin = (userID, value, callbackThen, callbackCatch) => (
     .catch((err) => callbackCatch(err));
 };
 
-export const updatePassword = (
-  userID,
-  value,
-  callbackThen,
-  callbackReset,
-  callbackCatch
-) => (dispatch) => {
+export const updatePassword = (userID, value, callbackThen, callbackReset, callbackCatch) => (
+  dispatch
+) => {
   return api
     .put(`users/change-password/me`, value)
     .then((res) => {
       dispatch({ type: types.UPDATE_PASSWORD_ADMIN, payload: res.data });
       Promise.resolve(res.data);
       swal({
-        text: 'Update successfully',
-        icon: 'success',
+        text: "Update successfully",
+        icon: "success",
         buttons: false,
         timer: 1500,
       });
@@ -66,8 +60,8 @@ export const updateAvatar = (value, config, callbackThen) => (dispatch) => {
     .then((res) => {
       dispatch({ type: types.UPDATE_AVATAR, payload: res.data });
       swal({
-        text: 'Update successfully',
-        icon: 'success',
+        text: "Update successfully",
+        icon: "success",
         buttons: false,
         timer: 1500,
       });

@@ -2,6 +2,9 @@
   "name": "vexere-admin",
   "version": "0.1.0",
   "private": true,
+  "description": "project vexere for admin",
+  "author": "ironhight",
+  "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
@@ -11,6 +14,7 @@
     "antd": "^3.26.9",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "express": "^4.17.1",
     "formik": "^2.1.4",
     "google-map-react": "^1.1.6",
     "history": "^4.10.1",
@@ -32,7 +36,9 @@
     "yup": "^0.28.1"
   },
   "scripts": {
-    "start": "set PORT=9876 & react-scripts start",
+    "start": "node server.js",
+    "start:dev": "set NODE_ENV=development& react-scripts start",
+    "start:production": "set NODE_ENV=production& react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

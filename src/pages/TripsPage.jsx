@@ -29,17 +29,17 @@ class TripsPage extends Component {
   renderTrips = () => {
     return this.props.trips.map((row, index) => {
       // lodash binh thuong
-      const res = _.get(
-        _.find(_.get(this.props, "stations", []), { _id: row.fromStation }),
-        "name"
-      );
+      // const res = _.get(
+      //   _.find(_.get(this.props, 'stations', []), { _id: row.fromStation }),
+      //   'name'
+      // );
 
       // pipe line
-      const res2 = _.chain(this.props)
-        .get("stations", []) // _.get(this.props, "stations", [])
-        .find({ _id: row.fromStation })
-        .get("name")
-        .value();
+      // const res2 = _.chain(this.props)
+      //   .get('stations', []) // _.get(this.props, "stations", [])
+      //   .find({ _id: row.fromStation })
+      //   .get('name')
+      //   .value();
 
       return (
         <TableRow key={index}>

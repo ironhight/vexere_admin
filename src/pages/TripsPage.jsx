@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as tripActions from '../redux/actions/trips';
-import * as stationActions from '../redux/actions/stations';
-import Authenticate from '../HOC/Authenticate';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as tripActions from "../redux/actions/trips";
+import * as stationActions from "../redux/actions/stations";
+import Authenticate from "../HOC/Authenticate";
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 
-import Button from '@material-ui/core/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
-import UpdateIcon from '@material-ui/icons/Update';
-import AddBoxIcon from '@material-ui/icons/AddBox';
+import Button from "@material-ui/core/Button";
+import DeleteIcon from "@material-ui/icons/Delete";
+import UpdateIcon from "@material-ui/icons/Update";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 
-import _ from 'lodash';
+import _ from "lodash";
 
 class TripsPage extends Component {
   componentDidMount() {
@@ -30,15 +30,15 @@ class TripsPage extends Component {
     return this.props.trips.map((row, index) => {
       // lodash binh thuong
       const res = _.get(
-        _.find(_.get(this.props, 'stations', []), { _id: row.fromStation }),
-        'name'
+        _.find(_.get(this.props, "stations", []), { _id: row.fromStation }),
+        "name"
       );
 
       // pipe line
       const res2 = _.chain(this.props)
-        .get('stations', []) // _.get(this.props, "stations", [])
+        .get("stations", []) // _.get(this.props, "stations", [])
         .find({ _id: row.fromStation })
-        .get('name')
+        .get("name")
         .value();
 
       return (
@@ -55,7 +55,7 @@ class TripsPage extends Component {
               variant="contained"
               color="secondary"
               startIcon={<DeleteIcon />}
-              style={{ marginRight: '10px' }}
+              style={{ marginRight: "10px" }}
               onClick={async () => {
                 await this.props.deleteTrip(row._id);
               }}
@@ -63,11 +63,7 @@ class TripsPage extends Component {
               Delete
             </Button>
 
-            <Button
-              variant="contained"
-              color="primary"
-              endIcon={<UpdateIcon />}
-            >
+            <Button variant="contained" color="primary" endIcon={<UpdateIcon />}>
               Update
             </Button>
           </TableCell>
@@ -79,12 +75,12 @@ class TripsPage extends Component {
   render() {
     return (
       <div>
-        <h1>QUẢN LÝ TRIPS</h1>
+        <h1>MANAGE TRIPS</h1>
         <Button
           variant="contained"
           color="primary"
           endIcon={<AddBoxIcon />}
-          onClick={() => this.props.history.push('/manager/trips/create-trip')}
+          onClick={() => this.props.history.push("/manager/trips/create-trip")}
         >
           Thêm Trips
         </Button>

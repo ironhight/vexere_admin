@@ -49,11 +49,7 @@ class StationsPage extends Component {
               variant="contained"
               color="primary"
               endIcon={<UpdateIcon />}
-              onClick={() =>
-                this.props.history.push(
-                  `/manager/stations/${row._id}/update-station`
-                )
-              }
+              onClick={() => this.props.history.push(`/manager/stations/${row._id}/update-station`)}
             >
               Update
             </Button>
@@ -66,7 +62,7 @@ class StationsPage extends Component {
   render() {
     return (
       <div>
-        <h1>QUẢN LÝ STATIONS</h1>
+        <h1>MANAGE STATIONS</h1>
         <CreateStation />
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
@@ -87,13 +83,10 @@ class StationsPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    stations: state.stations
+    stations: state.stations,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  stationActions
-)(Authenticate(StationsPage));
+export default connect(mapStateToProps, stationActions)(Authenticate(StationsPage));

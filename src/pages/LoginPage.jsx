@@ -14,7 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-
+import { message } from "antd";
 import { login } from "../redux/actions/auth";
 
 function Copyright() {
@@ -30,45 +30,45 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    width: "100%",
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 function LoginPage({ login }) {
   const [input, setInput] = useState({ email: "", password: "" });
 
-  const handleChange = e =>
+  const handleChange = (e) =>
     setInput({
       ...input,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
 
   let history = useHistory();
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = input;
     login({ email, password })
-      .then(res => {
+      .then((res) => {
         history.push("/admin/dashboard");
       })
-      .catch(err => console.log(err));
+      .catch((err) => message.error(`${err.message}`));
   };
 
   const classes = useStyles();

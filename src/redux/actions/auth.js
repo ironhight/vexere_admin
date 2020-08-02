@@ -1,38 +1,34 @@
-import jwtDecode from 'jwt-decode';
-import setAuthToken from '../../utils/setAuthToken';
-import api from '../../api';
-/**
- * return :
- * dispatch: trigger state thay doi
- * luu token vao localStorage
- * bo token vao header
- */
+import jwtDecode from "jwt-decode";
+import setAuthToken from "../../utils/setAuthToken";
+import api from "../../api";
+
 export const login = (credentials) => (dispatch) => {
   return api
-    .post('/users/login', credentials)
+    .post("/users/login", credentials)
     .then((res) => {
       const { token } = res.data;
-
+      if (!token) {
+        return Promise.reject({ message: res.data });
+      }
       const decode = jwtDecode(token);
-      if (decode.userType === 'client')
-        return Promise.reject({ message: 'Đăng nhập thất bại' });
+      if (decode.userType === "client")
+        return Promise.reject({ message: "Bạn không đủ quyền để đăng nhập vào trang này" });
 
       dispatch(setCurrentUser(decode));
 
-      localStorage.setItem('Authorization', `Bearer ${res.data.token}`);
+      localStorage.setItem("Authorization", `Bearer ${res.data.token}`);
 
       setAuthToken(token);
-      return Promise.resolve({ message: 'Đăng nhập thành công' });
+      return Promise.resolve({ message: "Đăng nhập thành công" });
     })
-    .catch(() =>
-      Promise.reject({
-        message: 'Đăng nhập thất bại',
-      })
-    );
+    .catch((error) => {
+      console.error(error);
+      return Promise.reject({ message: error.message });
+    });
 };
 
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('Authorization');
+  localStorage.removeItem("Authorization");
 
   setAuthToken();
 
@@ -41,7 +37,7 @@ export const logout = () => (dispatch) => {
 
 export const setCurrentUser = (data) => {
   return {
-    type: 'SET_CURRENT_USER',
+    type: "SET_CURRENT_USER",
     payload: data,
   };
 };

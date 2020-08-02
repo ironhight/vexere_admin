@@ -7,8 +7,8 @@ export const login = (credentials) => (dispatch) => {
     .post("/users/login", credentials)
     .then((res) => {
       const { token } = res.data;
-      if (!token) {
-        return Promise.reject({ message: res.data });
+      if (res.data.status === 400) {
+        return Promise.reject({ message: res.data.message });
       }
       const decode = jwtDecode(token);
       if (decode.userType === "client")

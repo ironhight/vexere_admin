@@ -55,7 +55,6 @@ class PaginationStations extends Component {
 
   render() {
     let { stations } = this.props;
-    console.log("PaginationStations -> render -> stations", stations);
     let { totalPages, currentPage, pageLimit, startIndex, endIndex } = this.state;
     let rowsPerPage = [];
     if (stations.results) {

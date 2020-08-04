@@ -51,6 +51,7 @@ main {
 
 #content {
     margin-left: 270px;
+    min-height: 75vh;
 }
 
 .sidebar-fixed .logo-wrapper img {

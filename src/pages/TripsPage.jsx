@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as tripActions from "../redux/actions/trips";
-import * as stationActions from "../redux/actions/stations";
 import Authenticate from "../HOC/Authenticate";
 
 import Table from "@material-ui/core/Table";
@@ -11,95 +10,122 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-
 import Button from "@material-ui/core/Button";
-import DeleteIcon from "@material-ui/icons/Delete";
-import UpdateIcon from "@material-ui/icons/Update";
 import AddBoxIcon from "@material-ui/icons/AddBox";
-
-import _ from "lodash";
+import Pagination from "../components/Pagination";
+import TripItem from "../components/Trip/TripItem";
 
 class TripsPage extends Component {
-  componentDidMount() {
-    if (_.isEmpty(this.props.trips)) {
-      this.props.getTrips();
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      totalRecords: "",
+      totalPages: "",
+      pageLimit: "",
+      currentPage: "",
+      startIndex: "",
+      endIndex: "",
+    };
   }
 
-  renderTrips = () => {
-    return this.props.trips.map((row, index) => {
-      // lodash binh thuong
-      // const res = _.get(
-      //   _.find(_.get(this.props, 'stations', []), { _id: row.fromStation }),
-      //   'name'
-      // );
+  componentDidMount() {
+    this.props.getTrips();
+    this.setState({ totalRecords: this.props.trips.length });
+  }
 
-      // pipe line
-      // const res2 = _.chain(this.props)
-      //   .get('stations', []) // _.get(this.props, "stations", [])
-      //   .find({ _id: row.fromStation })
-      //   .get('name')
-      //   .value();
+  showTrips = (trips) => {
+    let result = null;
+    result = trips.map((trip, index) => {
+      return <TripItem key={index} trip={trip} index={index} />;
+    });
 
-      return (
-        <TableRow key={index}>
-          <TableCell component="th" scope="row">
-            {index + 1}
-          </TableCell>
-          <TableCell align="right">{row.fromStation.name}</TableCell>
-          <TableCell align="right">{row.toStation.name}</TableCell>
-          <TableCell align="right">{row.startTime}</TableCell>
-          <TableCell align="right">{row.price}</TableCell>
-          <TableCell align="center">
-            <Button
-              variant="contained"
-              color="secondary"
-              startIcon={<DeleteIcon />}
-              style={{ marginRight: "10px" }}
-              onClick={async () => {
-                await this.props.deleteTrip(row._id);
-              }}
-            >
-              Delete
-            </Button>
+    return result;
+  };
 
-            <Button variant="contained" color="primary" endIcon={<UpdateIcon />}>
-              Update
-            </Button>
-          </TableCell>
-        </TableRow>
-      );
+  onChangePage = (data) => {
+    this.setState({
+      pageLimit: data.pageLimit,
+      totalPages: data.totalPages,
+      currentPage: data.page,
+      startIndex: data.startIndex,
+      endIndex: data.endIndex,
     });
   };
 
   render() {
+    let { trips } = this.props;
+    let { totalPages, currentPage, pageLimit, startIndex, endIndex } = this.state;
+    let rowsPerPage = [];
+    if (trips.length > 0) {
+      rowsPerPage = trips.slice(startIndex, endIndex + 1);
+    }
     return (
-      <div>
-        <h1>MANAGE TRIPS</h1>
-        <Button
-          variant="contained"
-          color="primary"
-          endIcon={<AddBoxIcon />}
-          onClick={() => this.props.history.push("/manager/trips/create-trip")}
-        >
-          Thêm Trips
-        </Button>
+      <div className="section product_list_mng">
+        <div className="container-fluid">
+          <div className="box_product_control mb-15">
+            <h1>Quản lý chuyến xe</h1>
+            <Button
+              variant="contained"
+              color="primary"
+              endIcon={<AddBoxIcon />}
+              onClick={() => this.props.history.push("/manager/trips/create-trip")}
+            >
+              Thêm chuyến xe
+            </Button>
+            <div className="row">
+              <div className="col-xs-12 box_change_pagelimit mt-15">
+                Hiển thị
+                <select
+                  className="form-control"
+                  value={pageLimit}
+                  onChange={(e) => this.setState({ pageLimit: parseInt(e.target.value) })}
+                >
+                  <option value={5}>5</option>
+                  <option value={10}>10</option>
+                  <option value={25}>25</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
+                </select>
+                chuyến xe
+              </div>
+            </div>
+          </div>
 
-        <TableContainer component={Paper}>
-          <Table aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">Số thứ tự</TableCell>
-                <TableCell align="right">Nơi đi</TableCell>
-                <TableCell align="right">Nơi đến</TableCell>
-                <TableCell align="right">Giờ xuất phát</TableCell>
-                <TableCell align="right">Giá tiền</TableCell>
-                <TableCell align="center">Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>{this.renderTrips()}</TableBody>
-          </Table>
-        </TableContainer>
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">Số thứ tự</TableCell>
+                  <TableCell align="center">Nơi đi</TableCell>
+                  <TableCell align="center">Nơi đến</TableCell>
+                  <TableCell align="center">Ngày, giờ xuất phát</TableCell>
+                  <TableCell align="center">Giá tiền</TableCell>
+                  <TableCell align="center">Hành động</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{this.showTrips(rowsPerPage)}</TableBody>
+            </Table>
+          </TableContainer>
+
+          <div className="box_pagination">
+            <div className="row">
+              <div className="col-xs-12 box_pagination_info text-right">
+                <p>
+                  {trips.length} Chuyến xe | Trang {currentPage}/{totalPages}
+                </p>
+              </div>
+              <div className="col-xs-12 text-center ml-30">
+                <Pagination
+                  totalRecords={trips.length}
+                  pageLimit={pageLimit || 5}
+                  initialPage={1}
+                  pagesToShow={5}
+                  onChangePage={this.onChangePage}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -111,6 +137,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { ...tripActions, ...stationActions })(
-  Authenticate(TripsPage)
-);
+const mapDispatchToProp = (dispatch) => {
+  return {
+    getTrips: () => dispatch(tripActions.getTrips()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProp)(Authenticate(TripsPage));

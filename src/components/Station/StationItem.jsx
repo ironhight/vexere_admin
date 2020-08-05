@@ -4,11 +4,11 @@ import TableRow from "@material-ui/core/TableRow";
 
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
-import UpdateIcon from "@material-ui/icons/Update";
 import { withRouter } from "react-router-dom";
 
 import * as stationActions from "../../redux/actions/stations";
 import { connect } from "react-redux";
+import UpdateStation from "../../pages/UpdateStation";
 
 class StationItem extends Component {
   render() {
@@ -18,10 +18,10 @@ class StationItem extends Component {
         <TableCell component="th" scope="row" align="center">
           {index + 1}
         </TableCell>
-        <TableCell align="right">{station.name}</TableCell>
-        <TableCell align="right">{station.address}</TableCell>
-        <TableCell align="right">{station.province}</TableCell>
-        <TableCell align="center">
+        <TableCell align="center">{station.name}</TableCell>
+        <TableCell align="center">{station.address}</TableCell>
+        <TableCell align="center">{station.province}</TableCell>
+        <TableCell align="center" style={{ display: "flex", justifyContent: "center" }}>
           <Button
             variant="contained"
             color="secondary"
@@ -31,33 +31,20 @@ class StationItem extends Component {
               this.props.deleteStation(station._id);
             }}
           >
-            Delete
+            Xóa
           </Button>
 
-          <Button
-            variant="contained"
-            color="primary"
-            endIcon={<UpdateIcon />}
-            onClick={() =>
-              this.props.history.push(
-                `/manager/stations/${station._id}/update-station`
-              )
-            }
-          >
-            Update
-          </Button>
+          <UpdateStation station={station} />
         </TableCell>
       </TableRow>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    stations: state.stations
+    stations: state.stations,
   };
 };
 
-export default withRouter(
-  connect(mapStateToProps, stationActions)(StationItem)
-);
+export default withRouter(connect(mapStateToProps, stationActions)(StationItem));

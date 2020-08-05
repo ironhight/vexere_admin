@@ -1,95 +1,104 @@
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { connect } from 'react-redux';
-import * as stationActions from '../redux/actions/stations';
+import React, { useState, useEffect } from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import { connect } from "react-redux";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import * as stationActions from "../redux/actions/stations";
+import UpdateIcon from "@material-ui/icons/Update";
 
-class UpdateStation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      address: '',
-      province: '',
-    };
-  }
+function UpdateStation(props) {
+  const [input, setInput] = useState({ name: "", address: "", province: "" });
 
-  componentDidMount() {
-    const stationId = this.props.match.params.stationId;
-    const station = this.props.stations.results.find(
-      (st) => st._id === stationId
-    );
-    if (station) {
-      this.setState(station);
-    }
-  }
+  const [open, setOpen] = useState(false);
 
-  onChange = (e) => {
-    this.setState({
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleChange = (e) =>
+    setInput({
+      ...input,
       [e.target.name]: e.target.value,
     });
+
+  useEffect(() => {
+    const { name, province, address } = props.station;
+    setInput({ name, province, address });
+  }, [props.station]);
+
+  const onSubmit = (e) => {
+    const { _id } = props.station;
+    props.updateStation(_id, input);
+    setOpen(false);
   };
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    const { _id, name, address, province } = this.state;
-    const data = { name, address, province };
-    this.props
-      .updateStation(_id, data)
-      .then(() => this.props.history.push('/manager/stations'))
-      .catch((err) => console.log(err));
-  };
-
-  render() {
-    const { name, address, province } = this.state;
-    return (
-      <div>
-        <h1>CẬP NHẬT STATION</h1>
-        <form autoComplete="off" onSubmit={this.onSubmit}>
+  return (
+    <div>
+      <Button
+        variant="contained"
+        color="primary"
+        endIcon={<UpdateIcon />}
+        onClick={handleClickOpen}
+      >
+        Cập nhật
+      </Button>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Station</DialogTitle>
+        <DialogContent>
           <TextField
-            id="standard-basic"
-            label="name"
-            style={{ margin: '15px' }}
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Tên bến xe"
+            type="text"
             name="name"
-            value={name}
-            onChange={this.onChange}
+            value={input.name}
+            onChange={handleChange}
+            fullWidth
           />
-          <br />
-
           <TextField
+            autoFocus
+            margin="dense"
+            id="address"
+            label="Địa chỉ"
             type="text"
-            id="standard-basic"
-            label="address"
-            style={{ margin: '15px' }}
             name="address"
-            value={address}
-            onChange={this.onChange}
+            value={input.address}
+            onChange={handleChange}
+            fullWidth
+            style={{ marginTop: "25px" }}
           />
-          <br />
-
           <TextField
+            autoFocus
+            margin="dense"
+            id="province"
+            label="Tỉnh thành"
             type="text"
-            id="standard-basic"
-            label="province"
-            style={{ margin: '15px' }}
             name="province"
-            value={province}
-            onChange={this.onChange}
+            fullWidth
+            value={input.province}
+            onChange={handleChange}
+            style={{ marginTop: "25px" }}
           />
-          <br />
-
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            style={{ margin: '15px' }}
-          >
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="secondary" variant="contained">
+            Cancel
+          </Button>
+          <Button onClick={onSubmit} color="primary" variant="contained">
             Submit
           </Button>
-        </form>
-      </div>
-    );
-  }
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => {
@@ -98,4 +107,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, stationActions)(UpdateStation);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateStation: (id, data) => dispatch(stationActions.updateStation(id, data)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateStation);

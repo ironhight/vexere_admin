@@ -22,15 +22,14 @@ function CreateStation({ createStation }) {
     setOpen(false);
   };
 
-  const handleChange = e =>
+  const handleChange = (e) =>
     setInput({
       ...input,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
 
   const handleSubmit = () => {
     createStation(input);
-    // console.log("TCL: handleSubmit -> input", input);
     setInput({ name: "", address: "", province: "" });
     setOpen(false);
   };
@@ -43,14 +42,10 @@ function CreateStation({ createStation }) {
         endIcon={<AddBoxIcon />}
         onClick={handleClickOpen}
       >
-        Thêm Station
+        Thêm bến xe
       </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Station</DialogTitle>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Bến xe</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -62,8 +57,6 @@ function CreateStation({ createStation }) {
             value={input.name}
             onChange={handleChange}
             fullWidth
-
-            // style={{ marginTop: "25px" }}
           />
           <TextField
             autoFocus
@@ -92,10 +85,10 @@ function CreateStation({ createStation }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="secondary" variant="contained">
-            Cancel
+            Hủy
           </Button>
           <Button onClick={handleSubmit} color="primary" variant="contained">
-            Submit
+            Xác nhận
           </Button>
         </DialogActions>
       </Dialog>

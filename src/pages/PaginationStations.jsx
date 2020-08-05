@@ -65,7 +65,7 @@ class PaginationStations extends Component {
       <div className="section product_list_mng">
         <div className="container-fluid">
           <div className="box_product_control mb-15">
-            <h1>MANAGE STATIONS</h1>
+            <h1>Quản lý bến xe</h1>
             <CreateStation />
             <div className="row">
               <div className="col-xs-12 box_change_pagelimit mt-15">
@@ -81,7 +81,7 @@ class PaginationStations extends Component {
                   <option value={50}>50</option>
                   <option value={100}>100</option>
                 </select>
-                station
+                bến xe
               </div>
             </div>
           </div>
@@ -91,10 +91,10 @@ class PaginationStations extends Component {
               <TableHead>
                 <TableRow>
                   <TableCell align="center">Số thứ tự</TableCell>
-                  <TableCell align="right">Tên bến xe</TableCell>
-                  <TableCell align="right">Địa chỉ</TableCell>
-                  <TableCell align="right">Tỉnh thành</TableCell>
-                  <TableCell align="center">Action</TableCell>
+                  <TableCell align="center">Tên bến xe</TableCell>
+                  <TableCell align="center">Địa chỉ</TableCell>
+                  <TableCell align="center">Tỉnh thành</TableCell>
+                  <TableCell align="center">Hành động</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>{this.showStations(rowsPerPage)}</TableBody>
@@ -105,7 +105,7 @@ class PaginationStations extends Component {
             <div className="row">
               <div className="col-xs-12 box_pagination_info text-right">
                 <p>
-                  {stations.length} stations | Trang {currentPage}/{totalPages}
+                  {stations.length} bến xe | Trang {currentPage}/{totalPages}
                 </p>
               </div>
               <div className="col-xs-12 text-center ml-30">

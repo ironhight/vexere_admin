@@ -19,7 +19,6 @@ class Routes extends React.Component {
         <Route path="/admin/profile" exact component={ProfilePage} />
         <Route path="/admin/profile/edit-profile" exact component={EditProfile} />
         <Route path="/manager/stations" exact component={PaginationStations} />
-        <Route path="/manager/stations/:stationId/update-station" exact component={UpdateStation} />
 
         <Route path="/manager/trips" exact component={TripsPage} />
         <Route path="/manager/trips/create-trip" exact component={CreateTrip} />

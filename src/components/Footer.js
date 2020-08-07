@@ -1,5 +1,5 @@
-import React from 'react';
-import { MDBFooter, MDBIcon } from 'mdbreact';
+import React from "react";
+import { MDBFooter, MDBIcon } from "mdbreact";
 
 const Footer = () => {
   return (
@@ -20,8 +20,8 @@ const Footer = () => {
         <MDBIcon fab icon="codepen" className="mr-3" />
       </div>
       <p className="footer-copyright mb-0 py-3 text-center">
-        &copy; {new Date().getFullYear()} Copyright:
-        <a href="/"> ironhight </a>
+        &copy; {new Date().getFullYear()} Bản quyền của:
+        <a href="/"> Nguyễn Hoài Nam </a>
       </p>
     </MDBFooter>
   );

@@ -13,37 +13,37 @@ const TopNavigation = () => {
         <NavLink exact={true} to="/admin/dashboard" activeClassName="activeClass">
           <MDBListGroupItem>
             <MDBIcon icon="chart-pie" className="mr-3" />
-            Dashboard
+            Tổng quan
           </MDBListGroupItem>
         </NavLink>
         <NavLink to="/admin/profile" activeClassName="activeClass">
           <MDBListGroupItem>
             <MDBIcon icon="user" className="mr-3" />
-            Profile
+            Cá nhân
           </MDBListGroupItem>
         </NavLink>
         <NavLink to="/manager/stations" activeClassName="activeClass">
           <MDBListGroupItem>
             <MDBIcon icon="warehouse" className="mr-3" />
-            Manage Stations
+            Quản lý bến xe
           </MDBListGroupItem>
         </NavLink>
         <NavLink to="/manager/trips" activeClassName="activeClass">
           <MDBListGroupItem>
             <MDBIcon icon="bus-alt" className="mr-3" />
-            Manage Trips
+            Quản lý chuyến xe
           </MDBListGroupItem>
         </NavLink>
         <NavLink to="/manager/tickets" activeClassName="activeClass">
           <MDBListGroupItem>
             <MDBIcon icon="ticket-alt" className="mr-3" />
-            Manage Tickets
+            Quản lý vé xe
           </MDBListGroupItem>
         </NavLink>
         <NavLink to="/manager/users" activeClassName="activeClass">
           <MDBListGroupItem>
             <MDBIcon icon="users" className="mr-3" />
-            Manage Users
+            Quản lý người dùng
           </MDBListGroupItem>
         </NavLink>
       </MDBListGroup>

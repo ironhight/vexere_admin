@@ -50,7 +50,7 @@ function UpdateStation(props) {
         Cập nhật
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Station</DialogTitle>
+        <DialogTitle id="form-dialog-title">Cập nhật bến xe</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus

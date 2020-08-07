@@ -7,7 +7,7 @@ import {
   MDBCollapse,
   MDBNavItem,
   MDBNavLink,
-  MDBIcon
+  MDBIcon,
 } from "mdbreact";
 import { connect } from "react-redux";
 import { logout } from "../redux/actions/auth";
@@ -16,38 +16,32 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 class TopNavigation extends Component {
   state = {
-    collapse: false
+    collapse: false,
   };
 
   onClick = () => {
     this.setState({
-      collapse: !this.state.collapse
+      collapse: !this.state.collapse,
     });
   };
 
   toggle = () => {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      dropdownOpen: !this.state.dropdownOpen,
     });
   };
 
   render() {
     return (
       <Router>
-        <MDBNavbar
-          color="indigo"
-          dark
-          className="flexible-navbar"
-          expand="md"
-          scrolling
-        >
+        <MDBNavbar color="indigo" dark className="flexible-navbar" expand="md" scrolling>
           <MDBNavbarBrand
             href="/"
             onClick={() => {
               this.props.history.push("/");
             }}
           >
-            <strong className="white-text">ADMIN</strong>
+            <strong className="white-text">TRANG CHỦ</strong>
           </MDBNavbarBrand>
           <MDBNavbarToggler onClick={this.onClick} />
           <MDBCollapse isOpen={this.state.collapse} navbar>
@@ -59,7 +53,7 @@ class TopNavigation extends Component {
                     this.props.history.push("/admin/dashboard");
                   }}
                 >
-                  Home
+                  Tổng quan
                 </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
@@ -69,7 +63,7 @@ class TopNavigation extends Component {
                     this.props.history.push("/admin/profile");
                   }}
                 >
-                  Profile
+                  Cá nhân
                 </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
@@ -79,7 +73,7 @@ class TopNavigation extends Component {
                     this.props.history.push("/manager/stations");
                   }}
                 >
-                  Stations
+                  Bến xe
                 </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
@@ -89,7 +83,7 @@ class TopNavigation extends Component {
                     this.props.history.push("/manager/trips");
                   }}
                 >
-                  Trips
+                  Chuyến xe
                 </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
@@ -99,7 +93,7 @@ class TopNavigation extends Component {
                     this.props.history.push("/manager/tickets");
                   }}
                 >
-                  Tickets
+                  Vé xe
                 </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
@@ -109,7 +103,7 @@ class TopNavigation extends Component {
                     this.props.history.push("/manager/users");
                   }}
                 >
-                  Users
+                  Người dùng
                 </MDBNavLink>
               </MDBNavItem>
             </MDBNavbarNav>
@@ -142,7 +136,7 @@ class TopNavigation extends Component {
                   }}
                   to="/"
                 >
-                  Log out
+                  Đăng xuất
                 </MDBNavLink>
               </MDBNavItem>
             </MDBNavbarNav>

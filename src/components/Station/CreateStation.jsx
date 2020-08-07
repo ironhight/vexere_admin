@@ -45,7 +45,7 @@ function CreateStation({ createStation }) {
         Thêm bến xe
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Bến xe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Thêm bến xe</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus

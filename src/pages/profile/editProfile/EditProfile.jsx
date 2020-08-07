@@ -24,7 +24,7 @@ class EditProfile extends PureComponent {
             <Wrapper>
               <h5 className="font-weight-normal d-flex align-items-center mb-4">
                 <Icon type="user" className="mr-1" />
-                Personal information
+                Thông tin cá nhân
               </h5>
               <Skeleton loading={user.isLoading} active paragraph={{ rows: 6 }}>
                 <PersonalForm
@@ -37,7 +37,7 @@ class EditProfile extends PureComponent {
                 />
               </Skeleton>
               <h5 className="font-weight-normal d-flex align-items-center mb-4 mt-5">
-                <Icon type="lock" className="mr-1" /> Change password
+                <Icon type="lock" className="mr-1" /> Thay đổi mật khẩu
               </h5>
               <Skeleton loading={user.isLoading} active paragraph={{ rows: 6 }}>
                 <PasswordForm id={user._id} />

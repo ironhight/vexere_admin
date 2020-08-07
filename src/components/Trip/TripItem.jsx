@@ -4,16 +4,12 @@ import TableRow from "@material-ui/core/TableRow";
 
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
-import UpdateIcon from "@material-ui/icons/Update";
 import moment from "moment";
 import { connect } from "react-redux";
 import * as tripActions from "../../redux/actions/trips";
+import UpdateTrip from "../../pages/UpdateTrip";
 
 class TripItem extends Component {
-  handleClick(trip) {
-    console.log("heheheh", trip);
-  }
-
   render() {
     const { trip, index } = this.props;
     return (
@@ -27,7 +23,7 @@ class TripItem extends Component {
           {moment(trip.startTime).format("DD/MM/YYYY, HH:mm:ss")}
         </TableCell>
         <TableCell align="center">{new Intl.NumberFormat("vi-VN").format(trip.price)} đ</TableCell>
-        <TableCell align="center">
+        <TableCell align="center" style={{ display: "flex", justifyContent: "center" }}>
           <Button
             variant="contained"
             color="secondary"
@@ -40,14 +36,7 @@ class TripItem extends Component {
             Xóa
           </Button>
 
-          <Button
-            variant="contained"
-            color="primary"
-            endIcon={<UpdateIcon />}
-            onClick={() => this.handleClick(trip)}
-          >
-            Cập nhật
-          </Button>
+          <UpdateTrip trip={trip} />
         </TableCell>
       </TableRow>
     );

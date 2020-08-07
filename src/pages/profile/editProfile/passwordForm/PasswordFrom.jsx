@@ -50,7 +50,7 @@ class PasswordForm extends Component {
             <form onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-3 text-right">
-                  <label className="mb-0 ant-form-item-required">Password</label>
+                  <label className="mb-0 ant-form-item-required">Mật khẩu cũ</label>
                 </div>
                 <div className="col-9">
                   <FormItem
@@ -63,7 +63,7 @@ class PasswordForm extends Component {
                         <Input.Password
                           type="password"
                           size="large"
-                          placeholder="Enter password..."
+                          placeholder="Mật khẩu cũ..."
                           {...field}
                         />
                       )}
@@ -73,7 +73,7 @@ class PasswordForm extends Component {
               </div>
               <div className="row">
                 <div className="col-3 text-right">
-                  <label className="mb-0 ant-form-item-required">New password</label>
+                  <label className="mb-0 ant-form-item-required">Mật khẩu mới</label>
                 </div>
                 <div className="col-9">
                   <FormItem
@@ -86,7 +86,7 @@ class PasswordForm extends Component {
                         <Input.Password
                           type="password"
                           size="large"
-                          placeholder="Enter new password..."
+                          placeholder="Nhập mật khẩu mới..."
                           {...field}
                         />
                       )}
@@ -96,7 +96,7 @@ class PasswordForm extends Component {
               </div>
               <div className="row">
                 <div className="col-3 text-right">
-                  <label className="mb-0 ant-form-item-required">Verify new password</label>
+                  <label className="mb-0 ant-form-item-required">Xác nhận mật khẩu</label>
                 </div>
                 <div className="col-9">
                   <FormItem
@@ -111,7 +111,7 @@ class PasswordForm extends Component {
                         <Input.Password
                           type="password"
                           size="large"
-                          placeholder="Enter verify new password..."
+                          placeholder="Nhập lại mật khẩu mới..."
                           {...field}
                         />
                       )}
@@ -122,7 +122,7 @@ class PasswordForm extends Component {
               <div className="row">
                 <div className="col-6 offset-3">
                   <Button htmlType="submit" type="primary" size="large">
-                    Update
+                    Cập nhật
                   </Button>
                 </div>
               </div>

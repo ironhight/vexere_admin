@@ -13,14 +13,7 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 
 class PersonalForm extends Component {
   render() {
-    const {
-      id,
-      email,
-      fullName,
-      phoneNumber,
-      dayOfBirth,
-      updateAdmin
-    } = this.props;
+    const { id, email, fullName, phoneNumber, dayOfBirth, updateAdmin } = this.props;
     return (
       <Formik
         enableReinitialize={true}
@@ -28,17 +21,15 @@ class PersonalForm extends Component {
           email: email,
           fullName: fullName,
           phoneNumber: phoneNumber,
-          dayOfBirth: moment(dayOfBirth, "DD/MM/YYYY")
+          dayOfBirth: moment(dayOfBirth, "DD/MM/YYYY"),
         }}
         validationSchema={object().shape({
-          email: string()
-            .required("Email is required")
-            .email("Email is invalid"),
+          email: string().required("Email is required").email("Email is invalid"),
           fullName: string().required("Full name is required"),
           phoneNumber: string()
             .matches(phoneRegExp, "Phone number is not valid")
             .required("Phone number is required"),
-          dayOfBirth: string().required("Day of birth is required")
+          dayOfBirth: string().required("Day of birth is required"),
         })}
         onSubmit={(values, { setFieldError, setSubmitting }) => {
           updateAdmin(
@@ -47,21 +38,14 @@ class PersonalForm extends Component {
             () => {
               setSubmitting(false);
             },
-            err => {
-              _.map(Object.keys(err.response.data), field => {
+            (err) => {
+              _.map(Object.keys(err.response.data), (field) => {
                 setFieldError(field, err.response.data[field]);
               });
             }
           );
         }}
-        render={({
-          touched,
-          errors,
-          setFieldValue,
-          values,
-          handleSubmit,
-          isSubmitting
-        }) => (
+        render={({ touched, errors, setFieldValue, values, handleSubmit, isSubmitting }) => (
           <Spin spinning={isSubmitting}>
             <form onSubmit={handleSubmit}>
               <div className="row">
@@ -82,9 +66,7 @@ class PersonalForm extends Component {
                               type="mail"
                               style={{
                                 color:
-                                  touched.email && errors.email
-                                    ? "#f5222d"
-                                    : "rgba(0,0,0,.25)"
+                                  touched.email && errors.email ? "#f5222d" : "rgba(0,0,0,.25)",
                               }}
                             />
                           }
@@ -100,15 +82,11 @@ class PersonalForm extends Component {
               </div>
               <div className="row">
                 <div className="col-3 text-right">
-                  <label className="mb-0 ant-form-item-required">
-                    Full name
-                  </label>
+                  <label className="mb-0 ant-form-item-required">Tên đầy đủ</label>
                 </div>
                 <div className="col-9">
                   <FormItem
-                    validateStatus={
-                      touched.fullName && errors.fullName && "error"
-                    }
+                    validateStatus={touched.fullName && errors.fullName && "error"}
                     help={touched.fullName && errors.fullName}
                   >
                     <Field
@@ -122,7 +100,7 @@ class PersonalForm extends Component {
                                 color:
                                   touched.fullName && errors.fullName
                                     ? "#f5222d"
-                                    : "rgba(0,0,0,.25)"
+                                    : "rgba(0,0,0,.25)",
                               }}
                             />
                           }
@@ -139,15 +117,11 @@ class PersonalForm extends Component {
 
               <div className="row">
                 <div className="col-3 text-right">
-                  <label className="mb-0 ant-form-item-required">
-                    Phone number
-                  </label>
+                  <label className="mb-0 ant-form-item-required">Số điện thoại</label>
                 </div>
                 <div className="col-9">
                   <FormItem
-                    validateStatus={
-                      touched.phoneNumber && errors.phoneNumber && "error"
-                    }
+                    validateStatus={touched.phoneNumber && errors.phoneNumber && "error"}
                     help={touched.phoneNumber && errors.phoneNumber}
                   >
                     <Field
@@ -161,7 +135,7 @@ class PersonalForm extends Component {
                                 color:
                                   touched.phoneNumber && errors.phoneNumber
                                     ? "#f5222d"
-                                    : "rgba(0,0,0,.25)"
+                                    : "rgba(0,0,0,.25)",
                               }}
                             />
                           }
@@ -178,15 +152,11 @@ class PersonalForm extends Component {
 
               <div className="row">
                 <div className="col-3 text-right">
-                  <label className="mb-0 ant-form-item-required">
-                    Day of birth
-                  </label>
+                  <label className="mb-0 ant-form-item-required">Ngày sinh nhật</label>
                 </div>
                 <div className="col-9">
                   <FormItem
-                    validateStatus={
-                      touched.dayOfBirth && errors.dayOfBirth && "error"
-                    }
+                    validateStatus={touched.dayOfBirth && errors.dayOfBirth && "error"}
                     help={touched.dayOfBirth && errors.dayOfBirth}
                   >
                     <DatePicker
@@ -195,11 +165,8 @@ class PersonalForm extends Component {
                       size="large"
                       className="d-block"
                       name="dayOfBirth"
-                      onChange={value =>
-                        setFieldValue(
-                          "dayOfBirth",
-                          value === null ? undefined : value
-                        )
+                      onChange={(value) =>
+                        setFieldValue("dayOfBirth", value === null ? undefined : value)
                       }
                     />
                   </FormItem>
@@ -209,7 +176,7 @@ class PersonalForm extends Component {
               <div className="row">
                 <div className="col-6 offset-3">
                   <Button htmlType="submit" type="primary" size="large">
-                    Update
+                    Cập nhật
                   </Button>
                 </div>
               </div>

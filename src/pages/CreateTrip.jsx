@@ -1,67 +1,79 @@
-import React, { Component } from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import * as stationActions from '../redux/actions/stations';
-import * as tripActions from '../redux/actions/trips';
-import { connect } from 'react-redux';
-import _ from 'lodash';
+import React, { useState, useEffect } from "react";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import * as stationActions from "../redux/actions/stations";
+import * as tripActions from "../redux/actions/trips";
+import { connect } from "react-redux";
+import AddBoxIcon from "@material-ui/icons/AddBox";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
-class CreateTrip extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fromStation: '',
-      toStation: '',
-      startTime: '',
-      price: '',
-    };
-  }
+function CreateTrip(props) {
+  const [input, setInput] = useState({
+    fromStation: "",
+    toStation: "",
+    startTime: "06-18-2020",
+    price: "",
+  });
 
-  componentDidMount() {
-    if (_.isEmpty(this.props.stations)) {
-      this.props.getStations();
-    }
-  }
+  const [open, setOpen] = useState(false);
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    const { fromStation, toStation, startTime, price } = this.state;
-    const data = { fromStation, toStation, startTime, price };
-    this.props
-      .createTrip(data)
-      .then(() => this.props.history.push('/manager/trips'))
-      .catch((err) => console.log(err));
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
-  onChange = (e) => {
-    this.setState({
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleChange = (e) =>
+    setInput({
+      ...input,
       [e.target.name]: e.target.value,
     });
+
+  useEffect(() => {
+    props.getStations();
+  }, []);
+
+  const handleSubmit = (e) => {
+    props.createTrip(input);
+    setInput({ fromStation: "", toStation: "", startTime: "", price: "" });
+    setOpen(false);
   };
 
-  render() {
-    const { fromStation, toStation, startTime, price } = this.state;
-    return (
-      <div>
-        <h1>THÊM MỚI TRIP</h1>
-        <form onSubmit={this.onSubmit}>
+  return (
+    <div>
+      <Button
+        variant="contained"
+        color="primary"
+        endIcon={<AddBoxIcon />}
+        onClick={handleClickOpen}
+      >
+        Thêm chuyến xe
+      </Button>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Thêm mới chuyến xe</DialogTitle>
+        <DialogContent>
           <FormControl>
-            <InputLabel style={{ width: '200px' }} id="fromStation">
+            <InputLabel style={{ width: "200px" }} id="fromStation">
               Ga xuất phát
             </InputLabel>
             <Select
-              style={{ width: '200px' }}
+              style={{ width: "200px" }}
               labelId="fromStation"
               id="fromStation"
               name="fromStation"
-              value={fromStation}
-              onChange={this.onChange}
+              value={input.fromStation}
+              onChange={handleChange}
             >
-              {this.props.stations.results.map((elm, index) => {
+              {props.stations.results.map((elm, index) => {
                 return (
                   <MenuItem key={index} value={elm._id}>
                     {elm.name}
@@ -71,19 +83,20 @@ class CreateTrip extends Component {
             </Select>
           </FormControl>
           <br />
+          <br />
           <FormControl>
-            <InputLabel style={{ width: '200px' }} id="toStation">
+            <InputLabel style={{ width: "200px" }} id="toStation">
               Ga đến
             </InputLabel>
             <Select
-              style={{ width: '200px' }}
+              style={{ width: "200px" }}
               labelId="toStation"
               id="toStation"
               name="toStation"
-              value={toStation}
-              onChange={this.onChange}
+              value={input.toStation}
+              onChange={handleChange}
             >
-              {this.props.stations.results.map((elm, index) => {
+              {props.stations.results.map((elm, index) => {
                 return (
                   <MenuItem key={index} value={elm._id}>
                     {elm.name}
@@ -94,40 +107,38 @@ class CreateTrip extends Component {
           </FormControl>
 
           <br />
-
+          <br />
           <TextField
             type="date"
             id="standard-basic"
-            label="startTime"
-            style={{ margin: '15px' }}
+            style={{ margin: "15px" }}
             name="startTime"
-            value={startTime}
-            onChange={this.onChange}
+            value={input.startTime}
+            onChange={handleChange}
           />
           <br />
           <TextField
             type="number"
             id="standard-basic"
-            label="price"
-            style={{ margin: '15px' }}
+            label="Giá tiền"
+            style={{ margin: "15px" }}
             name="price"
-            value={price}
-            onChange={this.onChange}
+            value={input.price}
+            onChange={handleChange}
           />
           <br />
-
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            style={{ margin: '15px' }}
-          >
-            Submit
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="secondary" variant="contained">
+            Hủy
           </Button>
-        </form>
-      </div>
-    );
-  }
+          <Button onClick={handleSubmit} color="primary" variant="contained">
+            Xác nhận
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => {
@@ -136,6 +147,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { ...stationActions, ...tripActions })(
-  CreateTrip
-);
+export default connect(mapStateToProps, { ...stationActions, ...tripActions })(CreateTrip);

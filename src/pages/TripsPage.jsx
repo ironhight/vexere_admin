@@ -10,10 +10,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import AddBoxIcon from "@material-ui/icons/AddBox";
 import Pagination from "../components/Pagination";
 import TripItem from "../components/Trip/TripItem";
+import CreateTrip from "./CreateTrip";
 
 class TripsPage extends Component {
   constructor(props) {
@@ -64,14 +63,7 @@ class TripsPage extends Component {
         <div className="container-fluid">
           <div className="box_product_control mb-15">
             <h1>Quản lý chuyến xe</h1>
-            <Button
-              variant="contained"
-              color="primary"
-              endIcon={<AddBoxIcon />}
-              onClick={() => this.props.history.push("/manager/trips/create-trip")}
-            >
-              Thêm chuyến xe
-            </Button>
+            <CreateTrip />
             <div className="row">
               <div className="col-xs-12 box_change_pagelimit mt-15">
                 Hiển thị

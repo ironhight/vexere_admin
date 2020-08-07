@@ -30,22 +30,22 @@ class MyProfile extends PureComponent {
               <Wrapper>
                 <h5 className="font-weight-normal d-flex align-items-center mb-4">
                   <Icon type="user" className="mr-1" />
-                  Admin information
+                  Thông tin người quản trị
                 </h5>
                 <div className="form-group row">
                   <label className="col-sm-3">Email:</label>
                   <div className="col-sm-9">{user.email}</div>
                 </div>
                 <div className="form-group row">
-                  <label className="col-sm-3">Full Name:</label>
+                  <label className="col-sm-3">Họ và tên:</label>
                   <div className="col-sm-9">{user.fullName}</div>
                 </div>
                 <div className="form-group row">
-                  <label className="col-sm-3">Day of birth:</label>
+                  <label className="col-sm-3">Ngày sinh nhật:</label>
                   <div className="col-sm-9">{user.dayOfBirth}</div>
                 </div>
                 <div className="form-group row">
-                  <label className="col-sm-3">Phone number:</label>
+                  <label className="col-sm-3">Số điện thoại:</label>
                   <div className="col-sm-9">{user.phoneNumber}</div>
                 </div>
               </Wrapper>
@@ -57,7 +57,7 @@ class MyProfile extends PureComponent {
                 endIcon={<UpdateIcon />}
                 onClick={() => this.props.history.push(`/admin/profile/edit-profile`)}
               >
-                Update
+                Cập nhật
               </Button>
             </div>
           </div>

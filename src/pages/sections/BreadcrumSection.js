@@ -6,25 +6,22 @@ import {
   MDBBreadcrumb,
   MDBBreadcrumbItem,
   MDBFormInline,
-  MDBBtn
+  MDBBtn,
 } from "mdbreact";
 
 const BreadcrumSection = () => {
   return (
     <MDBCard className="mb-5">
-      <MDBCardBody
-        id="breadcrumb"
-        className="d-flex align-items-center justify-content-between"
-      >
+      <MDBCardBody id="breadcrumb" className="d-flex align-items-center justify-content-between">
         <MDBBreadcrumb>
-          <MDBBreadcrumbItem>Home</MDBBreadcrumbItem>
-          <MDBBreadcrumbItem active>Dashboard</MDBBreadcrumbItem>
+          <MDBBreadcrumbItem>Trang chủ</MDBBreadcrumbItem>
+          <MDBBreadcrumbItem active>Tổng quan</MDBBreadcrumbItem>
         </MDBBreadcrumb>
         <MDBFormInline className="md-form m-0">
           <input
             className="form-control form-control-sm"
             type="search"
-            placeholder="Type your query"
+            placeholder="Nhập để tìm kiếm"
             aria-label="Search"
           />
           <MDBBtn size="sm" color="primary" className="my-0">

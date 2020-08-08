@@ -94,7 +94,7 @@ class PaginationStations extends Component {
                   <TableCell align="center">Tên bến xe</TableCell>
                   <TableCell align="center">Địa chỉ</TableCell>
                   <TableCell align="center">Tỉnh thành</TableCell>
-                  <TableCell align="center">Hành động</TableCell>
+                  <TableCell align="center">Tùy chọn</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>{this.showStations(rowsPerPage)}</TableBody>

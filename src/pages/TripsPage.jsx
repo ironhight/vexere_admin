@@ -92,7 +92,7 @@ class TripsPage extends Component {
                   <TableCell align="center">Nơi đến</TableCell>
                   <TableCell align="center">Ngày, giờ xuất phát</TableCell>
                   <TableCell align="center">Giá tiền</TableCell>
-                  <TableCell align="center">Hành động</TableCell>
+                  <TableCell align="center">Tùy chọn</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>{this.showTrips(rowsPerPage)}</TableBody>

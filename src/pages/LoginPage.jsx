@@ -20,9 +20,9 @@ import { login } from "../redux/actions/auth";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      {"Bản quyền © "}
+      <Link color="inherit" href="http://fs07-vexere-admin-nam.herokuapp.com/">
+        Nguyễn Hoài Nam
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -80,7 +80,7 @@ function LoginPage({ login }) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Đăng nhập
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -89,7 +89,7 @@ function LoginPage({ login }) {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             autoFocus
@@ -101,16 +101,16 @@ function LoginPage({ login }) {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Mật khẩu"
             type="password"
             id="password"
             autoComplete="current-password"
             onChange={handleChange}
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth
@@ -119,14 +119,14 @@ function LoginPage({ login }) {
             className={classes.submit}
             onClick={handleSubmit}
           >
-            Sign In
+            ĐĂNG NHẬP
           </Button>
           <Grid container>
-            <Grid item xs>
+            {/* <Grid item xs>
               <Link href="#" variant="body2">
                 Forgot password?
               </Link>
-            </Grid>
+            </Grid> */}
             {/* <Grid item>
               <Link href="#" variant="body2">
                 {"Don't have an account? Sign Up"}

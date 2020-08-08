@@ -55,7 +55,7 @@ class UsersPage extends Component {
                 this.deleteUser(row._id);
               }}
             >
-              Delete
+              Xóa
             </Button>
           </TableCell>
         </TableRow>
@@ -66,17 +66,17 @@ class UsersPage extends Component {
   render() {
     return (
       <div>
-        <h1>MANAGE USERS</h1>
+        <h1>Quản lý người dùng</h1>
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell align="center">Số thứ tự</TableCell>
                 <TableCell align="center">Email</TableCell>
-                <TableCell align="center">Tên</TableCell>
+                <TableCell align="center">Họ và Tên</TableCell>
                 <TableCell align="center">Số điện thoại</TableCell>
                 <TableCell align="center">Ngày sinh</TableCell>
-                <TableCell align="center">Action</TableCell>
+                <TableCell align="center">Tùy chọn</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>{this.renderUsers()}</TableBody>

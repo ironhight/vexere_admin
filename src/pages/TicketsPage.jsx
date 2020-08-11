@@ -52,7 +52,6 @@ class TicketsPage extends Component {
 
   render() {
     let { tickets } = this.props;
-    console.log("TicketsPage -> render -> tickets", tickets);
     let { totalPages, currentPage, pageLimit, startIndex, endIndex } = this.state;
     let rowsPerPage = [];
     if (tickets.list.length > 0) {

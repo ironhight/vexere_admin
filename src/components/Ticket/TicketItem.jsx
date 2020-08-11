@@ -36,7 +36,9 @@ class TicketItem extends Component {
             variant="contained"
             color="secondary"
             startIcon={<DeleteIcon />}
-            onClick={() => {}}
+            onClick={() => {
+              this.props.deleteById(ticket._id);
+            }}
           >
             Xóa
           </Button>

@@ -16,3 +16,4 @@ export const UPDATE_AVATAR = "UPDATE_AVATAR";
 export const GET_AVATAR = "GET_AVATAR";
 
 export const GET_ALL_TICKET = "GET_ALL_TICKET";
+export const DELETE_TICKET = 'DELETE_TICKET'
